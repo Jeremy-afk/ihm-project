@@ -15,7 +15,7 @@ public class BarVisual : MonoBehaviour
     private Color highColor = Color.green;
 
     [Header("Debug")]
-    [SerializeField]
+    [SerializeField, Tooltip("[Space] to drain the value\n[Left Click] to refill with steps")]
     private bool debugMode = false;
     [SerializeField]
     private InputActionAsset playerInput;
