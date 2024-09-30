@@ -6,7 +6,7 @@
             "id": "bc2defb3-9415-4932-91e7-ad0f3d173ca8",
             "actions": [
                 {
-                    "name": "Cast",
+                    "name": "SelectCasting",
                     "type": "Button",
                     "id": "25940b6b-3ff0-4203-915b-034fd16b8c3b",
                     "expectedControlType": "Button",
@@ -50,7 +50,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "Cast",
+                    "action": "SelectCasting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -61,7 +61,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Switch Controller",
-                    "action": "Cast",
+                    "action": "SelectCasting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -72,7 +72,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox Controller",
-                    "action": "Cast",
+                    "action": "SelectCasting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
