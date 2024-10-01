@@ -21,7 +21,7 @@ public class BarVisual : MonoBehaviour
     private InputActionAsset playerInput;
 
     private InputAction debugActionDrain;
-    private InputAction debugAction;
+    private InputAction debugActionAdd;
     private float m_currentValue;
 
     private void OnEnable()
@@ -30,11 +30,11 @@ public class BarVisual : MonoBehaviour
 
         // Debug shit
         var debugActionAsset = playerInput.FindActionMap("Debug");
-        debugAction = debugActionAsset.FindAction("AddHookPower");
+        debugActionAdd = debugActionAsset.FindAction("AddHookPower");
         debugActionDrain = debugActionAsset.FindAction("DecreaseHookPower");
-        debugAction.Enable();
+        debugActionAdd.Enable();
         debugActionDrain.Enable();
-        debugAction.performed += AddValue;
+        debugActionAdd.performed += AddValue;
     }
 
     private void Start()
