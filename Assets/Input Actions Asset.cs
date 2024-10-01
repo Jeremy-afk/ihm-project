@@ -145,7 +145,7 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""8d782a2f-3212-4a97-acc2-6aa61b92a800"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -156,7 +156,7 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""431b862b-ff6e-4fc0-b358-cb070967e4c5"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -167,7 +167,7 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""9309f579-78ab-43f8-9038-ce4c83fbb195"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -178,7 +178,7 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""cf3dca5b-e691-4d1b-a849-9740c8b23a99"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -275,6 +275,54 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""3615abdc-97af-473d-912a-09388ee27429"",
+            ""actions"": [
+                {
+                    ""name"": ""AddHookPower"",
+                    ""type"": ""Button"",
+                    ""id"": ""86a1619d-603b-4d34-ac31-abd44f14f8b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DecreaseHookPower"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""dad3f2ea-5f8a-4010-9f9e-e778d10ffefc"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f8dfaf95-fef7-4357-a785-14a0e8540a78"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddHookPower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9864d5a6-2396-4eef-b5ff-e14229523ae0"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DecreaseHookPower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -324,6 +372,10 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
         m_Fishing_Cancel = m_Fishing.FindAction("Cancel", throwIfNotFound: true);
         m_Fishing_Catch = m_Fishing.FindAction("Catch", throwIfNotFound: true);
         m_Fishing_Movecursor = m_Fishing.FindAction("Move cursor", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_AddHookPower = m_Debug.FindAction("AddHookPower", throwIfNotFound: true);
+        m_Debug_DecreaseHookPower = m_Debug.FindAction("DecreaseHookPower", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -451,6 +503,60 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
         }
     }
     public FishingActions @Fishing => new FishingActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+    private readonly InputAction m_Debug_AddHookPower;
+    private readonly InputAction m_Debug_DecreaseHookPower;
+    public struct DebugActions
+    {
+        private @InputActionsAsset m_Wrapper;
+        public DebugActions(@InputActionsAsset wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AddHookPower => m_Wrapper.m_Debug_AddHookPower;
+        public InputAction @DecreaseHookPower => m_Wrapper.m_Debug_DecreaseHookPower;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void AddCallbacks(IDebugActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+            @AddHookPower.started += instance.OnAddHookPower;
+            @AddHookPower.performed += instance.OnAddHookPower;
+            @AddHookPower.canceled += instance.OnAddHookPower;
+            @DecreaseHookPower.started += instance.OnDecreaseHookPower;
+            @DecreaseHookPower.performed += instance.OnDecreaseHookPower;
+            @DecreaseHookPower.canceled += instance.OnDecreaseHookPower;
+        }
+
+        private void UnregisterCallbacks(IDebugActions instance)
+        {
+            @AddHookPower.started -= instance.OnAddHookPower;
+            @AddHookPower.performed -= instance.OnAddHookPower;
+            @AddHookPower.canceled -= instance.OnAddHookPower;
+            @DecreaseHookPower.started -= instance.OnDecreaseHookPower;
+            @DecreaseHookPower.performed -= instance.OnDecreaseHookPower;
+            @DecreaseHookPower.canceled -= instance.OnDecreaseHookPower;
+        }
+
+        public void RemoveCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDebugActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -484,5 +590,10 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
         void OnCancel(InputAction.CallbackContext context);
         void OnCatch(InputAction.CallbackContext context);
         void OnMovecursor(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnAddHookPower(InputAction.CallbackContext context);
+        void OnDecreaseHookPower(InputAction.CallbackContext context);
     }
 }

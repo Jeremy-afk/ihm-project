@@ -23,6 +23,9 @@ public class BarVisual : MonoBehaviour
     private InputAction debugActionDrain;
     private InputAction debugAction;
     private float m_currentValue;
+    public float currentValue {
+        get { return m_currentValue; } 
+    }
 
     private void OnEnable()
     {
@@ -63,5 +66,12 @@ public class BarVisual : MonoBehaviour
     private void AddValue(InputAction.CallbackContext context)
     {
         SetValue(m_currentValue + .05f);
+    }
+
+    public void AddValue(float delta)
+    {
+        m_currentValue += delta;
+        barFill.fillAmount = m_currentValue;
+        barFill.color = Color.Lerp(lowColor, highColor, m_currentValue);
     }
 }
