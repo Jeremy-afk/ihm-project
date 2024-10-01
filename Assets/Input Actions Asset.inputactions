@@ -253,6 +253,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "3615abdc-97af-473d-912a-09388ee27429",
+            "actions": [
+                {
+                    "name": "AddHookPower",
+                    "type": "Button",
+                    "id": "86a1619d-603b-4d34-ac31-abd44f14f8b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DecreaseHookPower",
+                    "type": "PassThrough",
+                    "id": "dad3f2ea-5f8a-4010-9f9e-e778d10ffefc",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f8dfaf95-fef7-4357-a785-14a0e8540a78",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddHookPower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9864d5a6-2396-4eef-b5ff-e14229523ae0",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DecreaseHookPower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
