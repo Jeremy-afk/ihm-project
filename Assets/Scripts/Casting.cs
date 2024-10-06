@@ -68,6 +68,7 @@ public class Casting : MonoBehaviour
         if(isAngleChosen && isStrenghtChosen && !hasSpawned) 
         { 
             CreateTarget();
+            spriteRenderer.enabled = false;
         }
     }
 
