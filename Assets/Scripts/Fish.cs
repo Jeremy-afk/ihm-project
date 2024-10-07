@@ -13,21 +13,29 @@ public class Fish : MonoBehaviour
     [SerializeField] private float fleeSpeed;
 
     private float timeLeft;
+    private Vector2 baitPosition;
     private Vector3 direction = Vector3.zero;
     private int[] listOfShame = new int[] { -1,0,1};
     private readonly System.Random random = new System.Random();
 
-    [HideInInspector] public bool isFleeing;
+    private bool isFleeing = false;
+    private bool isBaited = false;
 
     private void Start()
     {
         direction = new Vector3(UnityEngine.Random.Range(-1f, 2f), UnityEngine.Random.Range(-1f, 1f), 0);
         timeLeft = changeDirectionTime;
     }
+
     // Makes the fish approach the position of the bait
     public void SetBait(GameObject fishingRod, Vector2 baitPosition)
     {
-        this.fishingRod = fishingRod;
+        if (fishingRod != null)
+        {
+            isBaited = true;
+            this.baitPosition = baitPosition;
+            this.fishingRod = fishingRod;
+        }
     }
 
     // The fish has been correctly hooked and is trying to escape
@@ -44,11 +52,21 @@ public class Fish : MonoBehaviour
 
     private void Update()
     {
+        if (isBaited)
+        {
+            ApproachBait();
+        }
+
         if (isFleeing) 
         { 
             Fleeing();
         }
 
+    }
+
+    private void ApproachBait()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, fishingRod.transform.position, fleeSpeed * Time.deltaTime);
     }
 
     // The fish bites the bait (notifies the fishing rod)

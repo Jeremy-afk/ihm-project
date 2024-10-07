@@ -59,19 +59,11 @@ public class BarVisual : MonoBehaviour
         value = Mathf.Clamp01(value);
         m_currentValue = value;
         barFill.fillAmount = value;
-
         barFill.color = Color.Lerp(lowColor, highColor, value);
     }
 
     private void AddValue(InputAction.CallbackContext context)
     {
         SetValue(m_currentValue + .05f);
-    }
-
-    public void AddValue(float delta)
-    {
-        m_currentValue += delta;
-        barFill.fillAmount = m_currentValue;
-        barFill.color = Color.Lerp(lowColor, highColor, m_currentValue);
     }
 }

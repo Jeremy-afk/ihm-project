@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.Windows.Speech;
 
-public class Fishnet : MonoBehaviour
+public class FishNet : MonoBehaviour
 {
     private InputActionsAsset controls;
 
@@ -20,6 +15,8 @@ public class Fishnet : MonoBehaviour
 
     private CapsuleCollider2D fishCollider;
     private BoxCollider2D collider;
+
+    private float hookLevel = .5f;
 
     private bool colliding;
 
@@ -38,8 +35,8 @@ public class Fishnet : MonoBehaviour
     {
         controls.Disable();
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         bar = barObject.GetComponent<BarVisual>();
         bar.SetValue(0.5f);
@@ -47,24 +44,34 @@ public class Fishnet : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         direction = controls.Fishing.Movecursor.ReadValue<Vector2>();
         transform.Translate(direction * Time.deltaTime * speed);
 
-        if(!colliding)
-        {
-            bar.AddValue(-Time.deltaTime * rateOfLoss);
-        }
+        ManageHookLevel();
+        UpdateHookBarVisual();
+    }
+
+    private void ManageHookLevel()
+    {
+        if(colliding)
+            hookLevel += Time.deltaTime * rateOfGain;
+        else
+            hookLevel -= Time.deltaTime * rateOfLoss;
+    }
+
+    private void UpdateHookBarVisual()
+    {
+        bar.SetValue(hookLevel);
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Fish"))
         {
-            bar.AddValue(+Time.deltaTime * rateOfGain);
-            Debug.Log("Fish is still inside the net.");
+            hookLevel += Time.deltaTime * rateOfGain;
+            //Debug.Log("Fish is still inside the net.");
         }
     }
 

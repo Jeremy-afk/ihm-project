@@ -130,33 +130,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4174632124579569928, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4174632124579569928, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
-      propertyPath: m_Color.g
-      value: 0.638396
-      objectReference: {fileID: 0}
-    - target: {fileID: 4174632124579569928, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4174632124579569928, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
-      propertyPath: m_SortingOrder
-      value: -5
-      objectReference: {fileID: 0}
     - target: {fileID: 4499835925518773058, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
       propertyPath: m_Name
       value: FishPool
-      objectReference: {fileID: 0}
-    - target: {fileID: 5283324813784606181, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5283324813784606181, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5283324813784606181, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
       propertyPath: m_LocalPosition.x
@@ -303,9 +279,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1543569454058447924, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1921884712083988430, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: m_Name
       value: FishingRod
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921884712083988430, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6795185376214565824, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: m_Camera
