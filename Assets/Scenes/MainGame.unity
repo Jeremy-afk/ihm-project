@@ -269,16 +269,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 967399699}
     - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: rateOfLoss
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: castingSystem
       value: 
       objectReference: {fileID: 1335643143}
     - target: {fileID: 8375094922447440788, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: m_Name
       value: Fishnet
-      objectReference: {fileID: 0}
-    - target: {fileID: 8375094922447440788, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -743,10 +743,6 @@ PrefabInstance:
       objectReference: {fileID: 302189354}
     - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: notification
-      value: 
-      objectReference: {fileID: 2020948140}
-    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
-      propertyPath: notificationPrefab
       value: 
       objectReference: {fileID: 2020948140}
     - target: {fileID: 7935056731089104085, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}

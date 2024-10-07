@@ -22,7 +22,7 @@ public class FishNet : MonoBehaviour
     private float hookLevel = 0.5f;
     private float hookTimeAllowedBelowZero;
     private bool colliding;
-
+    private bool ended = false;
 
     private void Awake()
     {
@@ -51,7 +51,10 @@ public class FishNet : MonoBehaviour
 
     private void Update()
     {
+        if (ended) return;
+
         direction = controls.Fishing.Movecursor.ReadValue<Vector2>();
+        print("Direction: " + direction.x + " x ; " + direction.y + " y");
         transform.Translate(direction * Time.deltaTime * netMovingSpeed);
 
         ManageHookLevel();
@@ -87,6 +90,7 @@ public class FishNet : MonoBehaviour
     private void Escapes()
     {
         castingSystem.FishEscaped();
+        ended = true;
     }
 
     private void UpdateHookBarVisual()

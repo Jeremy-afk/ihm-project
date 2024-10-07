@@ -165,59 +165,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Controller",
-                    "id": "578c3f21-d4af-4053-9bce-ad753f185b22",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "28889a63-0b3f-4f15-9514-56e732d517ea",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Switch Controller;Xbox Controller",
                     "action": "Move cursor",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "4bfac8f9-6969-444c-98da-dd8688705a26",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Switch Controller;Xbox Controller",
-                    "action": "Move cursor",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "095b5f5c-86a1-41d5-8bf5-2331303d1519",
-                    "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Switch Controller;Xbox Controller",
-                    "action": "Move cursor",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "3d3a2974-edce-4285-8afc-0126c4a780b6",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Switch Controller;Xbox Controller",
-                    "action": "Move cursor",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "7b841c7e-ce41-40f1-a29b-2a755ec1bd9b",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Switch Controller;Xbox Controller",
-                    "action": "Move cursor",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",

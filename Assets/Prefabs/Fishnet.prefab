@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &421921475207901303
 Transform:
   m_ObjectHideFlags: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   rateOfLoss: 0.4
   rateOfGain: 0.1
   bar: {fileID: 0}
+  castingSystem: {fileID: 0}
 --- !u!212 &216002796774586950
 SpriteRenderer:
   m_ObjectHideFlags: 0
