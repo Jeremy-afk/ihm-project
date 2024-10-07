@@ -23,13 +23,17 @@ public class FishPool : MonoBehaviour
     [SerializeField, Tooltip("Will the pool try to spawn a fish for the whole capacity (False) ?  Or will it stops at the first fish that fails to spawn (True) ?")]
     private bool stopOnFirstFail = false;
 
+    [Space]
+
+    [SerializeField]
+    private FishNet fishNet;
 
     private float m_minimumSpawnDistanceSqr;
     private Fish[] m_fishes;
 
 
     // Returns the closest fish to the given position within the given distance (otherwise returns null)
-    public Fish HookFish(Vector2 position, float maxDistance)
+    public Fish PutBaitInPosition(Vector2 position, float maxDistance)
     {
         Fish selectedFish = null;
 
@@ -45,6 +49,12 @@ public class FishPool : MonoBehaviour
                     selectedFish = fish;
                 }
             }
+        }
+
+        if (selectedFish != null)
+        {
+            print("Caught a fish : " + selectedFish.name + ", coordinates: " + selectedFish.transform.position.ToString());
+            selectedFish.SetBait(fishNet, position);
         }
 
         return selectedFish;

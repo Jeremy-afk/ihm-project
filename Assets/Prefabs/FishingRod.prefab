@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3998396970692755760}
   - component: {fileID: 1036522382269714401}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,10 +130,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f422aca204f779d4481f0f94bcd14e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeDelayBeforeGameOver: 1.5
+  baitMaxDistance: 3
   rotationSpeed: 2
   forceSpeed: 2
   distanceMultiplier: 10
   target: {fileID: 2415583047461840070, guid: b2c64d72e0abf354d8b5868699a367b9, type: 3}
+  notification: {fileID: 0}
+  fishPool: {fileID: 0}
 --- !u!114 &6795185376214565824
 MonoBehaviour:
   m_ObjectHideFlags: 0

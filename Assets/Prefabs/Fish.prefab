@@ -48,8 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeDirectionTime: 2
   variance: 0
-  fleeSpeed: 1
-  isFleeing: 0
+  fleeSpeed: 0.5
 --- !u!70 &4679222863273135029
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -4,17 +4,16 @@ public class FishNet : MonoBehaviour
 {
     private InputActionsAsset controls;
 
-    private Vector2 direction;
     [SerializeField] private float speed;
 
     [SerializeField] private float rateOfLoss;
     [SerializeField] private float rateOfGain;
 
-    [SerializeField] private GameObject barObject;
-    private BarVisual bar;
+    [SerializeField] private BarVisual bar;
 
+    private Vector2 direction;
     private CapsuleCollider2D fishCollider;
-    private BoxCollider2D collider;
+    private BoxCollider2D boxFishNetCollider;
 
     private float hookLevel = .5f;
 
@@ -38,10 +37,9 @@ public class FishNet : MonoBehaviour
 
     private void Start()
     {
-        bar = barObject.GetComponent<BarVisual>();
         bar.SetValue(0.5f);
         fishCollider = GameObject.FindGameObjectWithTag("Fish").GetComponent<CapsuleCollider2D>();
-        collider = GetComponent<BoxCollider2D>();
+        boxFishNetCollider = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -51,6 +49,11 @@ public class FishNet : MonoBehaviour
 
         ManageHookLevel();
         UpdateHookBarVisual();
+    }
+
+    public void FishBitesBait()
+    {
+
     }
 
     private void ManageHookLevel()
@@ -64,14 +67,6 @@ public class FishNet : MonoBehaviour
     private void UpdateHookBarVisual()
     {
         bar.SetValue(hookLevel);
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Fish"))
-        {
-            hookLevel += Time.deltaTime * rateOfGain;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -12,8 +12,6 @@ public class FishAnimation : MonoBehaviour
     private float frequency = 1f;
     [SerializeField]
     private float baseXPosition = 0f;
-    [SerializeField]
-    private bool activateOnStart = true;
 
     private float timeOffset;
 
