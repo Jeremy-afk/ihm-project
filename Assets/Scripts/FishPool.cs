@@ -27,6 +27,8 @@ public class FishPool : MonoBehaviour
 
     [SerializeField]
     private FishNet fishNet;
+    [SerializeField]
+    private Casting castingSystem;
 
     private float m_minimumSpawnDistanceSqr;
     private Fish[] m_fishes;
@@ -53,13 +55,11 @@ public class FishPool : MonoBehaviour
 
         if (selectedFish != null)
         {
-            print("Caught a fish : " + selectedFish.name + ", coordinates: " + selectedFish.transform.position.ToString());
-            selectedFish.SetBait(fishNet, position);
+            selectedFish.SetBait(castingSystem, fishNet, position);
         }
 
         return selectedFish;
     }
-
 
     private void Awake()
     {

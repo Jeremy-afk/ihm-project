@@ -47,7 +47,7 @@ public class NotificationAlert : MonoBehaviour
         ToogleNotification(false);
     }
 
-    private void Start()
+    private void Awake()
     {
         if (showOnStart)
             NewNotification("Welcome to the game!", ButtonReference.None, defaultDuration);

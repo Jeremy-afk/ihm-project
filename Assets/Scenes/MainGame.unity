@@ -277,6 +277,10 @@ PrefabInstance:
       propertyPath: fishNet
       value: 
       objectReference: {fileID: 1359589728}
+    - target: {fileID: 3314016073600397961, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
+      propertyPath: castingSystem
+      value: 
+      objectReference: {fileID: 1335643143}
     - target: {fileID: 4499835925518773058, guid: 0f3aaeb16cafd244b839dc43027a3481, type: 3}
       propertyPath: m_Name
       value: FishPool
@@ -557,6 +561,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1335643143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+  m_PrefabInstance: {fileID: 1539788219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f422aca204f779d4481f0f94bcd14e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1359589728 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
@@ -676,6 +691,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1413125998}
+    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: fishNet
+      value: 
+      objectReference: {fileID: 1359589728}
     - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: fishPool
       value: 

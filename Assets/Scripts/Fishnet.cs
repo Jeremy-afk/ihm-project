@@ -28,11 +28,13 @@ public class FishNet : MonoBehaviour
     private void OnEnable()
     {
         controls.Enable();
+        bar.gameObject.SetActive(true);
     }
 
     private void OnDisable()
     {
         controls.Disable();
+        bar.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -49,11 +51,6 @@ public class FishNet : MonoBehaviour
 
         ManageHookLevel();
         UpdateHookBarVisual();
-    }
-
-    public void FishBitesBait()
-    {
-
     }
 
     private void ManageHookLevel()

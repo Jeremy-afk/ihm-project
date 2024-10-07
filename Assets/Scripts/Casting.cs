@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Casting : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Casting : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private NotificationAlert notification;
     [SerializeField] private FishPool fishPool;
+    [SerializeField] private FishNet fishNet;
 
     private float timer;
     private float angle;
@@ -37,7 +39,10 @@ public class Casting : MonoBehaviour
         Initial,
         ChoosingAngle,
         ChoosingStrength,
-        Casted
+        Casted,
+        FishBitingBait,
+        FishEscaping,
+        GameOver
     }
 
     private void Awake()
@@ -64,6 +69,8 @@ public class Casting : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.size = new Vector2(1, .5f);
         spriteRenderer.enabled = false;
+
+        notification.NewNotification("Appuyer sur [ESPACE] pour commencer !", ButtonReference.None, 0);
     }
 
     private void Update()
@@ -88,6 +95,19 @@ public class Casting : MonoBehaviour
         }
     }
 
+    public void FishBitesBait()
+    {
+        castingState = CastingState.FishBitingBait;
+        CreateHookEvent();
+    }
+
+    public void FishFinishedTheBait()
+    {
+        castingState = CastingState.GameOver;
+        notification.ToogleNotification(false);
+        StartCoroutine(WaitGameOver("T'es trop lent bruh"));
+    }
+
     private void HandleAngle()
     {
         angle = 90 * Mathf.Sin(timer * rotationSpeed);
@@ -100,11 +120,27 @@ public class Casting : MonoBehaviour
         spriteRenderer.size = new Vector2(1, strenght);
     }
 
+    private void CreateHookEvent()
+    {
+        notification.NewNotification("Appuyer sur [ESPACE]", ButtonReference.None, 0);
+        // Should generate a random button to press
+    }
+
+    private void BeginFishNetMinigame()
+    {
+        castingState = CastingState.FishEscaping;
+        fish.Hook();
+        fishNet.transform.position = fish.transform.position;
+        fishNet.gameObject.SetActive(true);
+        notification.NewNotification("HIT !", ButtonReference.None, .8f);
+    }
+
     private void OnCasting(InputAction.CallbackContext context)
     {
         switch (castingState)
         {
             case CastingState.Initial:
+                notification.ToogleNotification(false);
                 spriteRenderer.enabled = true;
                 instantiatedTarget.SetActive(true);
                 timer = 0;
@@ -125,6 +161,14 @@ public class Casting : MonoBehaviour
             case CastingState.Casted:
                 // Do nothing (discard the input)
                 break;
+
+            case CastingState.FishBitingBait:
+                BeginFishNetMinigame();
+                break;
+
+            case CastingState.GameOver:
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                break;
         }
     }
 
@@ -144,14 +188,15 @@ public class Casting : MonoBehaviour
 
         if (!fish)
         {
-            StartCoroutine(WaitGameOver());
+            StartCoroutine(WaitGameOver("Trop loin d'un poisson !"));
         }
     }
 
-    private IEnumerator WaitGameOver()
+    private IEnumerator WaitGameOver(string msg)
     {
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
-        notification.NewNotification("Game Over !\nAucun poisson n'est intéressé.", ButtonReference.None, 0);
+        notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0);
+        castingState = CastingState.GameOver;
     }
 }

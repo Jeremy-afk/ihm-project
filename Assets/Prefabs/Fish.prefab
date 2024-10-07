@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6736956411972121701}
@@ -49,6 +49,7 @@ MonoBehaviour:
   changeDirectionTime: 2
   variance: 0
   fleeSpeed: 0.5
+  baitMaxDuration: 1.5
 --- !u!70 &4679222863273135029
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 3, y: 3}
   m_Direction: 0
 --- !u!1 &5885297558616995402
 GameObject:
