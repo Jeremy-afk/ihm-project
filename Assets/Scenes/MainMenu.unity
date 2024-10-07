@@ -843,6 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMenu: {fileID: 297786978}
+  mainGameSceneName: MainGame
 --- !u!114 &1134748393
 MonoBehaviour:
   m_ObjectHideFlags: 0

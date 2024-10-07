@@ -61,12 +61,16 @@ public class Fish : MonoBehaviour
         { 
             Fleeing();
         }
-
     }
 
     private void ApproachBait()
     {
         transform.position = Vector3.MoveTowards(transform.position, fishingRod.transform.position, fleeSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, fishingRod.transform.position) < 0.1f)
+        {
+            BiteBait();
+        }
     }
 
     // The fish bites the bait (notifies the fishing rod)

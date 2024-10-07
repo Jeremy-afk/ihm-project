@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 public class Casting : MonoBehaviour
 {
-    private GameObject target2;
-
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float forceSpeed;
     [SerializeField] private float distanceMultiplier;
@@ -44,13 +42,13 @@ public class Casting : MonoBehaviour
         controls.Disable();
     }
 
-    void Start()
+    private void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.size = new Vector2(1, 1);
     }
 
-    void Update()
+    private void Update()
     {
         target.transform.position = castPosition;
         if(!isAngleChosen)

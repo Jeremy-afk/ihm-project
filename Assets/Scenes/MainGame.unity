@@ -287,10 +287,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishingRod
       objectReference: {fileID: 0}
-    - target: {fileID: 1921884712083988430, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6795185376214565824, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: m_Camera
       value: 

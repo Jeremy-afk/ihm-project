@@ -71,7 +71,6 @@ public class FishNet : MonoBehaviour
         if (other.CompareTag("Fish"))
         {
             hookLevel += Time.deltaTime * rateOfGain;
-            //Debug.Log("Fish is still inside the net.");
         }
     }
 
