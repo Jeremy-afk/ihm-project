@@ -21,6 +21,7 @@ public class Casting : MonoBehaviour
     [SerializeField] private NotificationAlert notification;
     [SerializeField] private FishPool fishPool;
     [SerializeField] private FishNet fishNet;
+    [SerializeField] private Timer timerWidget;
 
     private float timer;
     private float angle;
@@ -28,6 +29,8 @@ public class Casting : MonoBehaviour
     private Vector2 castPosition;
     private CastingState castingState = CastingState.Initial;
 
+
+    private CameraFollow cameraFollow;
     private Fish fish;
     private GameObject instantiatedTarget;
     private SpriteRenderer spriteRenderer;
@@ -42,6 +45,7 @@ public class Casting : MonoBehaviour
         Casted,
         FishBitingBait,
         FishEscaping,
+        WaitGameOver,
         GameOver
     }
 
@@ -64,6 +68,9 @@ public class Casting : MonoBehaviour
 
     private void Start()
     {
+        Camera.main.TryGetComponent(out cameraFollow);
+        cameraFollow.SetPrimaryTarget(transform);
+
         instantiatedTarget = Instantiate(target, Vector3.zero, Quaternion.identity);
         instantiatedTarget.SetActive(false);
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -95,6 +102,11 @@ public class Casting : MonoBehaviour
         }
     }
 
+    public Vector2 GetNetPosition()
+    {
+        return fishNet.transform.position;
+    }
+
     public void FishBitesBait()
     {
         castingState = CastingState.FishBitingBait;
@@ -103,9 +115,15 @@ public class Casting : MonoBehaviour
 
     public void FishFinishedTheBait()
     {
-        castingState = CastingState.GameOver;
         notification.ToogleNotification(false);
         StartCoroutine(WaitGameOver("T'es trop lent bruh"));
+    }
+
+    public void FishEscaped()
+    {
+        fish.Release();
+        cameraFollow.ToogleFollow(false);
+        StartCoroutine(WaitGameOver("Le poisson s'est échappé !"));
     }
 
     private void HandleAngle()
@@ -130,9 +148,17 @@ public class Casting : MonoBehaviour
     {
         castingState = CastingState.FishEscaping;
         fish.Hook();
+        fish.tag = "Fish";
         fishNet.transform.position = fish.transform.position;
         fishNet.gameObject.SetActive(true);
         notification.NewNotification("HIT !", ButtonReference.None, .8f);
+
+        cameraFollow.SetPrimaryTarget(fishNet.transform);
+        cameraFollow.ToogleDynamicMode(true, fish.transform);
+        cameraFollow.ToogleFollow(true);
+
+        timerWidget.StartTimer();
+        fishPool.FleeAllFishes(fish);
     }
 
     private void OnCasting(InputAction.CallbackContext context)
@@ -181,7 +207,7 @@ public class Casting : MonoBehaviour
         instantiatedTarget.transform.position = castPosition;
     }
 
-    // Puts the bait in position in the pool 
+    // Puts the bait in position in the pool
     private void PostBaitInPool()
     {
         fish = fishPool.PutBaitInPosition(castPosition, baitMaxDistance);
@@ -194,6 +220,12 @@ public class Casting : MonoBehaviour
 
     private IEnumerator WaitGameOver(string msg)
     {
+        timerWidget.StopTimer();
+
+        if (castingState == CastingState.GameOver || castingState == CastingState.WaitGameOver)
+            yield break;
+
+        castingState = CastingState.WaitGameOver;
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
         notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0);

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class Fish : MonoBehaviour
@@ -10,9 +11,14 @@ public class Fish : MonoBehaviour
 
     [SerializeField, Tooltip("Base time between direction changes during fleeing mode")] float changeDirectionTime = 2.5f;
     [SerializeField, Tooltip("Amount of variance added to changeDirectionTime")] float variance;
-    [SerializeField] private float fleeSpeed;
+    [SerializeField] private float approachSpeed = 0.5f;
+    [SerializeField] private float fleeSpeed = 1.5f;
     [SerializeField, Tooltip("How much time can the player take before the fishes finishes the bait and goes away")]
     private float baitMaxDuration = 1.2f;
+
+    [Header("Animation")]
+    [SerializeField] private float animationSpeed;
+    [SerializeField] private float animationTime;
 
     private float timeLeft;
     private Vector2 baitPosition;
@@ -45,6 +51,11 @@ public class Fish : MonoBehaviour
         }
     }
 
+    public void ReleaseDirectly(Vector2 positionToFleeFrom)
+    {
+        StartCoroutine(FleeAnimation(positionToFleeFrom));
+    }
+
     // Makes the fish approach the position of the bait
     public void SetBait(Casting castingSystem, FishNet fishingNet, Vector2 baitPosition)
     {
@@ -65,9 +76,18 @@ public class Fish : MonoBehaviour
         isFleeing = true;
     }
 
+    // The player failed to keep the net in the right position and the fish is escaping
+    public void Release()
+    {
+        isFleeing = false;
+        isEatingBait = false;
+        isBaited = false;
+        StartCoroutine(FleeAnimation(castingSystem.GetNetPosition()));
+    }
+
     private void ApproachBait()
     {
-        transform.position = Vector3.MoveTowards(transform.position, baitPosition, fleeSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, baitPosition, approachSpeed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, baitPosition) < 0.01f)
         {
@@ -102,5 +122,20 @@ public class Fish : MonoBehaviour
 
         if (isEatingBait)
             castingSystem.FishFinishedTheBait();
+    }
+
+    private IEnumerator FleeAnimation(Vector2 fleeFrom)
+    {
+        float timer = animationTime;
+        Vector2 animDirection = ((Vector2)transform.position - fleeFrom).normalized * animationSpeed;
+
+        while (timer > 0)
+        {
+            transform.Translate(animDirection * Time.deltaTime);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+
+        gameObject.SetActive(false);
     }
 }

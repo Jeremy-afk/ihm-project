@@ -61,6 +61,17 @@ public class FishPool : MonoBehaviour
         return selectedFish;
     }
 
+    public void FleeAllFishes(Fish exception)
+    {
+        for (int i = 0; i < m_fishes.Length; i++)
+        {
+            if (m_fishes[i] != null && m_fishes[i] != exception)
+            {
+                m_fishes[i].ReleaseDirectly(castingSystem.GetNetPosition());
+            }
+        }
+    }
+
     private void Awake()
     {
         if (fishPrefab == null)

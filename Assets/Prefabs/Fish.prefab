@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4679222863273135029}
   m_Layer: 0
   m_Name: Fish
-  m_TagString: Fish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +48,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeDirectionTime: 2
   variance: 0
-  fleeSpeed: 0.5
+  approachSpeed: 0.5
+  fleeSpeed: 2.5
   baitMaxDuration: 1.5
+  animationSpeed: 0.5
+  animationTime: 3
 --- !u!70 &4679222863273135029
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
