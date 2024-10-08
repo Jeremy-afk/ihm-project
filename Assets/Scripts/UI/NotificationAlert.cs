@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public enum ButtonReference
@@ -9,7 +10,12 @@ public enum ButtonReference
     A,
     B,
     X,
-    Y
+    Y,
+    Z,
+    Q,
+    S,
+    D,
+    Space
 }
 
 public class NotificationAlert : MonoBehaviour
@@ -73,10 +79,56 @@ public class NotificationAlert : MonoBehaviour
 
     private void HandleButtonImage(ButtonReference btnRef)
     {
-        if (btnRef == ButtonReference.None)
+        switch(btnRef)
         {
-            imageButton.gameObject.SetActive(false);
-            return;
+            case ButtonReference.None:
+                imageButton.gameObject.SetActive(false);
+                break;
+
+            case ButtonReference.A:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/A");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.B:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/B");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.X:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/X");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.Y:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/Y");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.Z:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/Z");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.Q:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/Q");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.S:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/S");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.D:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/D");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.Space:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/Space");
+                imageButton.gameObject.SetActive(true);
+                break;
         }
 
         // Else do the logic to get the right button image and set it to the imageButton

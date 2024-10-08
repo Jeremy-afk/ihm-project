@@ -36,6 +36,8 @@ public class Casting : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private InputActionsAsset controls;
 
+    private PlayerInput playerInput;
+
 
     private enum CastingState
     {
@@ -78,7 +80,18 @@ public class Casting : MonoBehaviour
         spriteRenderer.size = new Vector2(1, .5f);
         spriteRenderer.enabled = false;
 
-        notification.NewNotification("Press [Button] to start!", ButtonReference.None, 0);
+        playerInput = GetComponent<PlayerInput>();
+
+        print(playerInput.currentControlScheme);
+
+        if (playerInput.currentControlScheme == "Switch Controller" || playerInput.currentControlScheme == "Xbox Controller")
+        {
+                notification.NewNotification("Press Button to start!", ButtonReference.A, 0);
+        } 
+        else if (playerInput.currentControlScheme == "Keyboard & Mouse") 
+        {
+            notification.NewNotification("Press Button to start!", ButtonReference.Space, 0);
+        }
     }
 
     private void Update()
@@ -155,8 +168,14 @@ public class Casting : MonoBehaviour
 
     private void CreateHookEvent()
     {
-        notification.NewNotification("Press [Button] !", ButtonReference.None, 0);
-        // Should generate a random button to press
+        if (playerInput.currentControlScheme == "Switch Controller" || playerInput.currentControlScheme == "Xbox Controller")
+        {
+            notification.NewNotification("Press Button !", ButtonReference.A, 0);
+        }
+        else if (playerInput.currentControlScheme == "Keyboard & Mouse")
+        {
+            notification.NewNotification("Press Button !", ButtonReference.Space, 0);
+        }
     }
 
     private void BeginFishNetMinigame()
