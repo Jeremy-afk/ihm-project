@@ -19,6 +19,7 @@ public class Fish : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private float animationSpeed;
     [SerializeField] private float animationTime;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private float timeLeft;
     private Vector2 baitPosition;
@@ -29,6 +30,7 @@ public class Fish : MonoBehaviour
     private bool isFleeing = false;
     private bool isEatingBait = false;
     private bool isBaited = false;
+    private bool isCaptured = false;
 
     private Casting castingSystem;
 
@@ -85,9 +87,17 @@ public class Fish : MonoBehaviour
         StartCoroutine(FleeAnimation(castingSystem.GetNetPosition()));
     }
 
+    // The player succeeded in capturing the fish
+    public void Capture()
+    {
+        isFleeing = false;
+        isCaptured = true;
+        StartCoroutine(CaptureAnimation());
+    }
+
     private void ApproachBait()
     {
-        transform.position = Vector3.MoveTowards(transform.position, baitPosition, approachSpeed * Time.deltaTime);
+        MoveFish(approachSpeed * Time.deltaTime * (baitPosition - (Vector2)transform.position).normalized);
 
         if (Vector3.Distance(transform.position, baitPosition) < 0.01f)
         {
@@ -104,7 +114,7 @@ public class Fish : MonoBehaviour
             timeLeft += changeDirectionTime + Random.Range(-variance, variance);
             direction = new Vector3(listOfShame[random.Next(0, listOfShame.Length)], listOfShame[random.Next(0, listOfShame.Length)], 0);
         }
-        transform.Translate(fleeSpeed * Time.deltaTime * direction);
+        MoveFish(fleeSpeed * Time.deltaTime * direction);
     }
 
     // The fish bites the bait (notifies the fishing rod)
@@ -114,6 +124,13 @@ public class Fish : MonoBehaviour
         isEatingBait = true;
         castingSystem.FishBitesBait();
         StartCoroutine(EatBait());
+    }
+
+    // Moves the fish and turns the sprite accordingly
+    private void MoveFish(Vector2 movement)
+    {
+        transform.Translate(movement);
+        spriteRenderer.flipX = movement.x > 0;
     }
 
     private IEnumerator EatBait()
@@ -131,11 +148,33 @@ public class Fish : MonoBehaviour
 
         while (timer > 0)
         {
-            transform.Translate(animDirection * Time.deltaTime);
+            MoveFish(animDirection * Time.deltaTime);
             timer -= Time.deltaTime;
             yield return null;
         }
 
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator CaptureAnimation()
+    {
+        // Do some animation for the capture
+        // Shake the fish a bit around its base position
+        float timer = animationTime;
+        Vector3 basePosition = transform.position;
+        Vector3 shakeDirection = new Vector3(0.02f, 0.02f, 0);
+
+        while (timer > 0) {
+            Vector3 shake = new Vector3(
+                Random.Range(-1f, 1f) * shakeDirection.x,
+                Random.Range(-1f, 1f) * shakeDirection.y,
+                0
+            );
+            transform.position = basePosition + shake;
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+
+        yield return null;
     }
 }

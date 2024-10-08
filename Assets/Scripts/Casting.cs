@@ -17,7 +17,7 @@ public class Casting : MonoBehaviour
     [SerializeField] private float distanceMultiplier;
 
     [Header("References")]
-    [SerializeField] private GameObject target;
+    [SerializeField] private PulseAnimation target;
     [SerializeField] private NotificationAlert notification;
     [SerializeField] private FishPool fishPool;
     [SerializeField] private FishNet fishNet;
@@ -32,7 +32,7 @@ public class Casting : MonoBehaviour
 
     private CameraFollow cameraFollow;
     private Fish fish;
-    private GameObject instantiatedTarget;
+    private PulseAnimation instantiatedTarget;
     private SpriteRenderer spriteRenderer;
     private InputActionsAsset controls;
 
@@ -47,6 +47,7 @@ public class Casting : MonoBehaviour
         Casted,
         FishBitingBait,
         FishEscaping,
+        FishCaptured,
         WaitGameOver,
         GameOver
     }
@@ -74,7 +75,7 @@ public class Casting : MonoBehaviour
         cameraFollow.SetPrimaryTarget(transform);
 
         instantiatedTarget = Instantiate(target, Vector3.zero, Quaternion.identity);
-        instantiatedTarget.SetActive(false);
+        instantiatedTarget.gameObject.SetActive(false);
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.size = new Vector2(1, .5f);
         spriteRenderer.enabled = false;
@@ -115,6 +116,8 @@ public class Casting : MonoBehaviour
         }
     }
 
+    #region Public Methods
+
     public Vector2 GetNetPosition()
     {
         return fishNet.transform.position;
@@ -138,6 +141,18 @@ public class Casting : MonoBehaviour
         cameraFollow.ToogleFollow(false);
         StartCoroutine(WaitGameOver("The fish escaped."));
     }
+
+    public void HookSuccessful()
+    {
+        timerWidget.StopTimer();
+        castingState = CastingState.FishCaptured;
+        fish.Capture();
+        cameraFollow.ToogleDynamicMode(false);
+        cameraFollow.ToogleFollow(false);
+        StartCoroutine(AnimateWin());
+    }
+
+    #endregion
 
     private void HandleAngle()
     {
@@ -172,6 +187,8 @@ public class Casting : MonoBehaviour
         fishNet.gameObject.SetActive(true);
         notification.NewNotification("HIT !", ButtonReference.None, .8f);
 
+        instantiatedTarget.gameObject.SetActive(false);
+
         cameraFollow.SetPrimaryTarget(fishNet.transform);
         cameraFollow.ToogleDynamicMode(true, fish.transform);
         cameraFollow.ToogleFollow(true);
@@ -187,23 +204,25 @@ public class Casting : MonoBehaviour
             case CastingState.Initial:
                 notification.ToogleNotification(false);
                 spriteRenderer.enabled = true;
-                instantiatedTarget.SetActive(true);
+                instantiatedTarget.gameObject.SetActive(true);
                 timer = 0;
-                castingState += 1;
+                castingState = CastingState.ChoosingAngle;
                 break;
 
             case CastingState.ChoosingAngle:
                 timer = 0;
-                castingState += 1;
+                castingState = CastingState.ChoosingStrength;
                 break;
 
             case CastingState.ChoosingStrength:
                 spriteRenderer.enabled = false;
-                castingState += 1;
+                instantiatedTarget.Pulse();
+                castingState = CastingState.Casted;
                 PostBaitInPool();
                 break;
 
             case CastingState.Casted:
+            case CastingState.FishCaptured:
                 // Do nothing (discard the input)
                 break;
 
@@ -248,6 +267,15 @@ public class Casting : MonoBehaviour
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
         notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0);
+        castingState = CastingState.GameOver;
+    }
+
+    private IEnumerator AnimateWin()
+    {
+        yield return new WaitForSeconds(timeDelayBeforeGameOver);
+
+        notification.NewNotification("You won !\nYou caught the fish !", ButtonReference.None, 0);
+
         castingState = CastingState.GameOver;
     }
 }

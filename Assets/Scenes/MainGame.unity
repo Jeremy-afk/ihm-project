@@ -730,6 +730,10 @@ PrefabInstance:
       value: Xbox Controller
       objectReference: {fileID: 0}
     - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 3239910958735212845, guid: b2c64d72e0abf354d8b5868699a367b9, type: 3}
+    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: fishNet
       value: 
       objectReference: {fileID: 1359589728}

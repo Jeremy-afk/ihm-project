@@ -50,8 +50,10 @@ MonoBehaviour:
   maxTimeBelowZeroTolerance: 1
   minTimeBelowZeroTolerance: 0.5
   netMovingSpeed: 7
-  rateOfLoss: 0.4
-  rateOfGain: 0.1
+  rateOfLoss: 0.3
+  rateOfLossClampingFactor: 1
+  rateOfGain: 0.15
+  rateOfGainClampingFactor: 0
   bar: {fileID: 0}
   castingSystem: {fileID: 0}
 --- !u!212 &216002796774586950
