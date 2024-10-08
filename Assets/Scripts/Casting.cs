@@ -77,7 +77,7 @@ public class Casting : MonoBehaviour
         spriteRenderer.size = new Vector2(1, .5f);
         spriteRenderer.enabled = false;
 
-        notification.NewNotification("Appuyer sur [ESPACE] pour commencer !", ButtonReference.None, 0);
+        notification.NewNotification("Press [Button] to start!", ButtonReference.None, 0);
     }
 
     private void Update()
@@ -116,14 +116,14 @@ public class Casting : MonoBehaviour
     public void FishFinishedTheBait()
     {
         notification.ToogleNotification(false);
-        StartCoroutine(WaitGameOver("T'es trop lent bruh"));
+        StartCoroutine(WaitGameOver("Too slow..."));
     }
 
     public void FishEscaped()
     {
         fish.Release();
         cameraFollow.ToogleFollow(false);
-        StartCoroutine(WaitGameOver("Le poisson s'est échappé !"));
+        StartCoroutine(WaitGameOver("The fish escaped."));
     }
 
     private void HandleAngle()
@@ -140,7 +140,7 @@ public class Casting : MonoBehaviour
 
     private void CreateHookEvent()
     {
-        notification.NewNotification("Appuyer sur [ESPACE]", ButtonReference.None, 0);
+        notification.NewNotification("Press [Button] !", ButtonReference.None, 0);
         // Should generate a random button to press
     }
 
@@ -214,7 +214,7 @@ public class Casting : MonoBehaviour
 
         if (!fish)
         {
-            StartCoroutine(WaitGameOver("Trop loin d'un poisson !"));
+            StartCoroutine(WaitGameOver("Too far from a fish."));
         }
     }
 
