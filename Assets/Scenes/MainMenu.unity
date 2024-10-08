@@ -294,7 +294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start !
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9acc8be47a17b7345ace4e632e953026, type: 2}
   m_sharedMaterial: {fileID: 969679656314731994, guid: 9acc8be47a17b7345ace4e632e953026, type: 2}
@@ -1143,7 +1143,6 @@ MonoBehaviour:
   invertMotion: 1
   frequency: 3
   baseXPosition: 0
-  activateOnStart: 1
 --- !u!1 &1448608335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1275,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit !
+  m_text: Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9acc8be47a17b7345ace4e632e953026, type: 2}
   m_sharedMaterial: {fileID: 969679656314731994, guid: 9acc8be47a17b7345ace4e632e953026, type: 2}
