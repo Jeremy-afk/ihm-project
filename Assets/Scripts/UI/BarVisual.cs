@@ -13,6 +13,12 @@ public class BarVisual : MonoBehaviour
     private Color lowColor = Color.red;
     [SerializeField]
     private Color highColor = Color.green;
+    [SerializeField]
+    private bool fixSaturation = false;
+    [SerializeField, Range(0f, 1f)]
+    private float saturation = 0.5f;
+    [SerializeField, Range(0f, 1f)]
+    private float value = 0.5f;
 
     [Header("Debug")]
     [SerializeField, Tooltip("[Space] to drain the value\n[Left Click] to refill with steps")]
@@ -23,9 +29,9 @@ public class BarVisual : MonoBehaviour
     private InputAction debugActionDrain;
     private InputAction debugActionAdd;
     private float m_currentValue;
-    public float currentValue {
-        get { return m_currentValue; } 
-    }
+
+    private float maxHue;
+    private float minHue;
 
     private void OnEnable()
     {
@@ -42,6 +48,8 @@ public class BarVisual : MonoBehaviour
 
     private void Start()
     {
+        Color.RGBToHSV(lowColor, out minHue, out _, out _);
+        Color.RGBToHSV(highColor, out maxHue, out _, out _);
         SetValue(startValue);
     }
 
@@ -54,12 +62,21 @@ public class BarVisual : MonoBehaviour
     }
 
     // Should be between 0 and 1
-    public void SetValue(float value)
+    public void SetValue(float val)
     {
-        value = Mathf.Clamp01(value);
-        m_currentValue = value;
-        barFill.fillAmount = value;
-        barFill.color = Color.Lerp(lowColor, highColor, value);
+        val = Mathf.Clamp01(val);
+        m_currentValue = val;
+        barFill.fillAmount = val;
+
+        if (fixSaturation)
+        {
+            barFill.color = Color.HSVToRGB(Mathf.Lerp(minHue, maxHue, m_currentValue*m_currentValue), saturation, value);
+        }
+        else
+        {
+            Color color = Color.Lerp(lowColor, highColor, val);
+            barFill.color = color;
+        }
     }
 
     private void AddValue(InputAction.CallbackContext context)

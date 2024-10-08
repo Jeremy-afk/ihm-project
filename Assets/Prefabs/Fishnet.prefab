@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTimeBelowZeroTolerance: 1
   minTimeBelowZeroTolerance: 0.5
-  netMovingSpeed: 5
+  netMovingSpeed: 7
   rateOfLoss: 0.4
   rateOfGain: 0.1
   bar: {fileID: 0}

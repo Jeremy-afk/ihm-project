@@ -51,7 +51,7 @@ MonoBehaviour:
   approachSpeed: 0.5
   fleeSpeed: 2.5
   baitMaxDuration: 1.5
-  animationSpeed: 3
+  animationSpeed: 8
   animationTime: 3
 --- !u!70 &4679222863273135029
 CapsuleCollider2D:

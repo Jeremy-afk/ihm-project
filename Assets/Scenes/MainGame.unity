@@ -269,10 +269,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 967399699}
     - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
-      propertyPath: rateOfLoss
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: castingSystem
       value: 
       objectReference: {fileID: 1335643143}

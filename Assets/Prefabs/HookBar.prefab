@@ -125,9 +125,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9df9b2dba0c8047a1d276a2ec269cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startValue: 0.75
   barFill: {fileID: 6091316615928173363}
   lowColor: {r: 1, g: 0, b: 0, a: 1}
   highColor: {r: 0, g: 1, b: 0, a: 1}
+  fixSaturation: 1
+  saturation: 0.85
+  value: 0.85
+  debugMode: 0
   playerInput: {fileID: -944628639613478452, guid: c96fd12f8b4ef9741977213d588c79b7, type: 3}
 --- !u!1 &8804696244583292219
 GameObject:
