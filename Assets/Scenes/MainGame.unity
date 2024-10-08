@@ -269,9 +269,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 967399699}
     - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: rateOfGain
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: rateOfLoss
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: castingSystem
       value: 
       objectReference: {fileID: 1335643143}
+    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: rateOfGainClampingFactor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: rateOfLossClampingFactor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8375094922447440788, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: m_Name
       value: Fishnet
@@ -725,6 +741,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1413125998}
+    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 3239910958735212845, guid: b2c64d72e0abf354d8b5868699a367b9, type: 3}
     - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: fishNet
       value: 

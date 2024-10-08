@@ -29,6 +29,7 @@ public class Fish : MonoBehaviour
     private bool isFleeing = false;
     private bool isEatingBait = false;
     private bool isBaited = false;
+    private bool isCaptured = false;
 
     private Casting castingSystem;
 
@@ -85,6 +86,14 @@ public class Fish : MonoBehaviour
         StartCoroutine(FleeAnimation(castingSystem.GetNetPosition()));
     }
 
+    // The player succeeded in capturing the fish
+    public void Capture()
+    {
+        isFleeing = false;
+        isCaptured = true;
+        StartCoroutine(CaptureAnimation());
+    }
+
     private void ApproachBait()
     {
         transform.position = Vector3.MoveTowards(transform.position, baitPosition, approachSpeed * Time.deltaTime);
@@ -137,5 +146,27 @@ public class Fish : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator CaptureAnimation()
+    {
+        // Do some animation for the capture
+        // Shake the fish a bit around its base position
+        float timer = animationTime;
+        Vector3 basePosition = transform.position;
+        Vector3 shakeDirection = new Vector3(0.02f, 0.02f, 0);
+
+        while (timer > 0) {
+            Vector3 shake = new Vector3(
+                Random.Range(-1f, 1f) * shakeDirection.x,
+                Random.Range(-1f, 1f) * shakeDirection.y,
+                0
+            );
+            transform.position = basePosition + shake;
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+
+        yield return null;
     }
 }

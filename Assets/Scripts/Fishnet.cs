@@ -9,7 +9,9 @@ public class FishNet : MonoBehaviour
     [SerializeField] private float netMovingSpeed;
 
     [SerializeField] private float rateOfLoss;
+    [SerializeField] private float rateOfLossClampingFactor = 1f;
     [SerializeField] private float rateOfGain;
+    [SerializeField] private float rateOfGainClampingFactor = 1f;
 
     [SerializeField] private BarVisual bar;
     [SerializeField] private Casting castingSystem;
@@ -18,7 +20,7 @@ public class FishNet : MonoBehaviour
     private CapsuleCollider2D fishCollider;
     private BoxCollider2D boxFishNetCollider;
     
-
+    private float timeColliding = 0f;
     private float hookLevel = 0.5f;
     private float hookTimeAllowedBelowZero;
     private bool colliding;
@@ -38,7 +40,8 @@ public class FishNet : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
-        bar.gameObject.SetActive(false);
+        if (bar != null)
+            bar.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -54,24 +57,25 @@ public class FishNet : MonoBehaviour
         if (ended) return;
 
         direction = controls.Fishing.Movecursor.ReadValue<Vector2>();
-        print("Direction: " + direction.x + " x ; " + direction.y + " y");
         transform.Translate(direction * Time.deltaTime * netMovingSpeed);
 
         ManageHookLevel();
         UpdateHookBarVisual();
+
+        timeColliding += Time.deltaTime;
     }
 
     private void ManageHookLevel()
     {
         if (colliding)
         {
-            hookLevel += Time.deltaTime * rateOfGain;
+            hookLevel += Time.deltaTime * rateOfGain / (1 + timeColliding * rateOfGainClampingFactor);
 
             hookTimeAllowedBelowZero = Mathf.Max(hookTimeAllowedBelowZero, minTimeBelowZeroTolerance);
         }
         else
         {
-            hookLevel -= Time.deltaTime * rateOfLoss;
+            hookLevel -= Time.deltaTime * rateOfLoss / (1 + timeColliding * rateOfLossClampingFactor);
 
             if (hookLevel <= 0)
             {
@@ -79,12 +83,22 @@ public class FishNet : MonoBehaviour
             }
         }
 
-        if (hookTimeAllowedBelowZero <= 0)
+        if (hookLevel >= 1)
+        {
+            HookSuccessful();
+        }
+        else if (hookTimeAllowedBelowZero <= 0)
         {
             Escapes();
         }
 
         hookLevel = Mathf.Clamp01(hookLevel);
+    }
+
+    private void HookSuccessful()
+    {
+        ended = true;
+        castingSystem.HookSuccessful();
     }
 
     private void Escapes()
@@ -102,6 +116,7 @@ public class FishNet : MonoBehaviour
     {
         if (other.CompareTag("Fish"))
         {
+            timeColliding = 0;
             colliding = true;
         }
     }
@@ -110,6 +125,7 @@ public class FishNet : MonoBehaviour
     {
         if (other.CompareTag("Fish"))
         {
+            timeColliding = 0;
             colliding = false;
         }
     }
