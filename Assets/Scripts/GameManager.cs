@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private Difficulty[] difficulties;
 
-
-    public GameDifficulty difficulty = GameDifficulty.Medium;
+    public GameDifficulty selectedDifficulty = GameDifficulty.Medium;
 
     public enum GameDifficulty
     {
@@ -30,29 +31,32 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        // Load the difficulty IF the game started (we're not in the MainMenu scene, but MainGame)
-
-    }
-
     public Difficulty GetDifficulty()
     {
-        return null;
+        int index = (int)selectedDifficulty;
+
+        if (index >= difficulties.Length)
+        {
+            Debug.LogWarning("Too few difficulties object were given to the game manager !");
+
+            return null;
+        }
+
+        return difficulties[index];
     }
 
     public void SetEasy()
     {
-        difficulty = GameDifficulty.Easy;
+        selectedDifficulty = GameDifficulty.Easy;
     }
 
     public void SetMedium()
     {
-        difficulty = GameDifficulty.Medium;
+        selectedDifficulty = GameDifficulty.Medium;
     }
 
     public void SetHard() 
     {
-        difficulty = GameDifficulty.Hard;
+        selectedDifficulty = GameDifficulty.Hard;
     }
 }

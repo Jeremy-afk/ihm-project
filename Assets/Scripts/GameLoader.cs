@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameLoader : MonoBehaviour
@@ -16,10 +17,15 @@ public class GameLoader : MonoBehaviour
     private Difficulty currentDifficulty;
     private GameManager gameManager;
 
-    private void Start()
+    private IEnumerator Start()
     {
+        Debug.Log("STARTING: " + GetInstanceID(), gameObject);
+
         gameManager = GameManager.Instance;
-        currentDifficulty = FetchDifficulty() ?? defaultDifficulty;
+
+        yield return new WaitForEndOfFrame();
+
+        currentDifficulty = FetchDifficulty();
 
         LoadDifficulty(currentDifficulty);
     }
@@ -42,11 +48,19 @@ public class GameLoader : MonoBehaviour
     {
         if (!difficulty)
         {
-            Debug.LogWarning($"Couldn't load difficulty. Going with the default settings.");
-            return;
+            Debug.LogWarning("Couldn't load difficulty. Loading the default difficulty.");
+            if (!defaultDifficulty)
+            {
+                Debug.LogWarning("There is no default difficulty, going with the default settings.");
+                return;
+            }
+            difficulty = defaultDifficulty;
         }
 
         Debug.Log("Loading difficulty " + difficulty.Name);
+
+        print(difficulty);
+        print(fishNet);
 
         // Load the fishnet
         fishNet.SetFishNetProperties(difficulty.FishNetProperties);

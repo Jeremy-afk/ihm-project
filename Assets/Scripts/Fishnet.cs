@@ -34,11 +34,13 @@ public class FishNet : MonoBehaviour
     private Vector2 direction;
     private CapsuleCollider2D fishCollider;
     private BoxCollider2D boxFishNetCollider;
-    
+    private SpriteRenderer spriteRenderer;
+
     private float timeColliding = 0f;
     private float hookLevel = 0.5f;
     private float hookTimeAllowedBelowZero;
     private bool colliding;
+    private bool started = false;
     private bool ended = false;
 
     private GameManager.GameDifficulty difficulty;
@@ -46,12 +48,6 @@ public class FishNet : MonoBehaviour
     private void Awake()
     {
         controls = new InputActionsAsset();
-    }
-
-    private void OnEnable()
-    {
-        controls.Enable();
-        bar.gameObject.SetActive(true);
     }
 
     private void OnDisable()
@@ -65,13 +61,15 @@ public class FishNet : MonoBehaviour
     {
         hookTimeAllowedBelowZero = maxTimeBelowZeroTolerance;
         bar.SetValue(0.5f);
-        fishCollider = GameObject.FindGameObjectWithTag("Fish").GetComponent<CapsuleCollider2D>();
         boxFishNetCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        spriteRenderer.enabled = false;
     }
 
     private void Update()
     {
-        if (ended) return;
+        if (!started || ended) return;
 
         direction = controls.Fishing.Movecursor.ReadValue<Vector2>();
         transform.Translate(direction * Time.deltaTime * netMovingSpeed);
@@ -80,6 +78,15 @@ public class FishNet : MonoBehaviour
         UpdateHookBarVisual();
 
         timeColliding += Time.deltaTime;
+    }
+
+    public void ActivateFishNet()
+    {
+        fishCollider = GameObject.FindGameObjectWithTag("Fish").GetComponent<CapsuleCollider2D>();
+        controls.Enable();
+        bar.gameObject.SetActive(true);
+        spriteRenderer.enabled = true;
+        started = true;
     }
 
     public void SetFishNetProperties(FishNetProperties properties)

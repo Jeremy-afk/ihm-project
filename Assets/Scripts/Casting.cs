@@ -211,7 +211,7 @@ public class Casting : MonoBehaviour
         fish.Hook();
         fish.tag = "Fish";
         fishNet.transform.position = fish.transform.position;
-        fishNet.gameObject.SetActive(true);
+        fishNet.ActivateFishNet();
         notification.NewNotification("HIT !", ButtonReference.None, .8f);
 
         instantiatedTarget.gameObject.SetActive(false);
