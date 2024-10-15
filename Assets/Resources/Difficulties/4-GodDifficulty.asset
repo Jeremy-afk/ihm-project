@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3a247585ea1ec41b2582cdb6d3d387, type: 3}
   m_Name: 4-GodDifficulty
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Medium
+  <Name>k__BackingField: God
   <FishPoolProperties>k__BackingField:
     maxFishes: 10
     minimumSpawnDistance: 1

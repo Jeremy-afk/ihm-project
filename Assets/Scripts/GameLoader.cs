@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameLoader : MonoBehaviour
@@ -13,6 +14,8 @@ public class GameLoader : MonoBehaviour
     private FishPool fishPool;
     [SerializeField]
     private Casting fishRoad;
+    [SerializeField]
+    private TextMeshProUGUI difficultyText;
 
     private Difficulty currentDifficulty;
     private GameManager gameManager;
@@ -55,5 +58,7 @@ public class GameLoader : MonoBehaviour
         fishNet.SetFishNetProperties(difficulty.FishNetProperties);
         fishPool.SetFishPoolProperties(difficulty.FishPoolProperties, difficulty.FishModifiers);
         fishRoad.SetCastingProperties(difficulty.CastingProperties);
+
+        difficultyText.text = difficulty.Name;
     }
 }

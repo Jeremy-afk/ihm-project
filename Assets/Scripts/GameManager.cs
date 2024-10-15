@@ -45,18 +45,8 @@ public class GameManager : MonoBehaviour
         return difficulties[index];
     }
 
-    public void SetEasy()
+    public void SetDifficulty(int difficultyIndex)
     {
-        selectedDifficulty = GameDifficulty.Easy;
-    }
-
-    public void SetMedium()
-    {
-        selectedDifficulty = GameDifficulty.Medium;
-    }
-
-    public void SetHard() 
-    {
-        selectedDifficulty = GameDifficulty.Hard;
+        selectedDifficulty = (GameDifficulty)difficultyIndex;
     }
 }
