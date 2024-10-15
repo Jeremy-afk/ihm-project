@@ -301,22 +301,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
-      propertyPath: bar
-      value: 
-      objectReference: {fileID: 967399699}
-    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
-      propertyPath: rateOfGain
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
-      propertyPath: castingSystem
-      value: 
-      objectReference: {fileID: 1335643143}
-    - target: {fileID: 726869085608215436, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
-      propertyPath: rateOfLossClampingFactor
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: bar
       value: 
@@ -811,6 +795,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDifficulty: {fileID: 0}
+  fishNet: {fileID: 0}
+  fishPool: {fileID: 0}
+  fishRoad: {fileID: 0}
 --- !u!114 &1335643143 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
@@ -1022,14 +1009,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1413125998}
-    - target: {fileID: 6795185376214565824, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: Xbox Controller
-      objectReference: {fileID: 0}
-    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 3239910958735212845, guid: b2c64d72e0abf354d8b5868699a367b9, type: 3}
     - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: fishNet
       value: 
@@ -1114,10 +1093,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1201457711}
     m_Modifications:
-    - target: {fileID: 636386796907322935, guid: fa4879f615c169446a71558ad979eff8, type: 3}
-      propertyPath: test
-      value: 
-      objectReference: {fileID: 21300000, guid: d3d01b3ac6c016e42a35b1dc78dd46f6, type: 3}
     - target: {fileID: 2972363802650260978, guid: fa4879f615c169446a71558ad979eff8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1331,10 +1306,6 @@ PrefabInstance:
       propertyPath: fishRoad
       value: 
       objectReference: {fileID: 1335643143}
-    - target: {fileID: 5483937968285292123, guid: f6f1271f44300cf41967f231c63af6a0, type: 3}
-      propertyPath: defaultDifficulty
-      value: 
-      objectReference: {fileID: 11400000, guid: 65538b57b69f5c7439d5a4028ca7354d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1448,3 +1419,4 @@ SceneRoots:
   - {fileID: 379523849}
   - {fileID: 1201457711}
   - {fileID: 101536264}
+  - {fileID: 1274375593}

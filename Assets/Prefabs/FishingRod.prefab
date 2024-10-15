@@ -140,6 +140,7 @@ MonoBehaviour:
   fishPool: {fileID: 0}
   fishNet: {fileID: 0}
   timerWidget: {fileID: 0}
+  pauseMenu: {fileID: 0}
 --- !u!114 &6795185376214565824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +167,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard & Mouse
+  m_DefaultControlScheme: Xbox Controller
   m_DefaultActionMap: Fishing
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

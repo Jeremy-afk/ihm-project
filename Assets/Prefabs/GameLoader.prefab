@@ -45,3 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDifficulty: {fileID: 11400000, guid: 67d3cf931a44984409511cc0433d5a2e, type: 2}
+  fishNet: {fileID: 0}
+  fishPool: {fileID: 0}
+  fishRoad: {fileID: 0}
