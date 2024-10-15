@@ -59,7 +59,7 @@ public class FishNet : MonoBehaviour
 
         print("Fetching difficulty...");
         // Currently working to move this to the game loader
-        GameObject gameManagerGo = GameObject.Find("Game Manager");
+        GameObject gameManagerGo = GameObject.Find("GameManager");
         if (gameManagerGo && gameManagerGo.TryGetComponent(out GameManager gameManager))
         {
             difficulty = gameManager.difficulty;

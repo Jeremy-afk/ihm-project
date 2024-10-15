@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class Casting : MonoBehaviour
 {
@@ -287,14 +288,15 @@ public class Casting : MonoBehaviour
     {
         if(!isGamePaused)
         {
-            Time.timeScale = 0;
             pauseMenu.SetActive(true);
+            isGamePaused = !isGamePaused;
+            Time.timeScale = 0;
         }
         else
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
+            isGamePaused = !isGamePaused;
         }
-
     }
 }
