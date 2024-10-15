@@ -26,6 +26,8 @@ public class FishNet : MonoBehaviour
     private bool colliding;
     private bool ended = false;
 
+    private GameManager.GameDifficulty difficulty;
+
     private void Awake()
     {
         controls = new InputActionsAsset();
@@ -50,6 +52,23 @@ public class FishNet : MonoBehaviour
         bar.SetValue(0.5f);
         fishCollider = GameObject.FindGameObjectWithTag("Fish").GetComponent<CapsuleCollider2D>();
         boxFishNetCollider = GetComponent<BoxCollider2D>();
+
+        /*
+        difficulty = GameObject.Find("Game Manager").GetComponent<GameManager>().difficulty;
+
+        if(difficulty == GameManager.GameDifficulty.Easy)
+        {
+
+        }
+        else if (difficulty == GameManager.GameDifficulty.Medium)
+        {
+
+        }
+        else if (difficulty == GameManager.GameDifficulty.Hard)
+        {
+
+        }
+        */
     }
 
     private void Update()
