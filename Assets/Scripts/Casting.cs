@@ -38,6 +38,8 @@ public class Casting : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    private bool isGamePaused;
+    [SerializeField] GameObject pauseMenu;
 
     private enum CastingState
     {
@@ -61,11 +63,13 @@ public class Casting : MonoBehaviour
     {
         controls.Enable();
         controls.Fishing.SelectCasting.performed += OnCasting;
+        controls.Fishing.Pause.performed += OnPause;
     }
 
     private void OnDisable()
     {
         controls.Fishing.SelectCasting.performed -= OnCasting;
+        controls.Fishing.SelectCasting.performed -= OnPause;
         controls.Disable();
     }
 
@@ -277,5 +281,20 @@ public class Casting : MonoBehaviour
         notification.NewNotification("You won !\nYou caught the fish !", ButtonReference.None, 0);
 
         castingState = CastingState.GameOver;
+    }
+
+    private void OnPause(InputAction.CallbackContext context)
+    {
+        if(!isGamePaused)
+        {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+        }
+
     }
 }

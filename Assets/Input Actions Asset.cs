@@ -62,6 +62,15 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""af3d9b42-92f5-46b9-ab76-5d024640029c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -198,6 +207,61 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""Keyboard ZQSD"",
+                    ""id"": ""b2c989dd-3e2b-43fb-a085-737ecac7ff9a"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move cursor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""cb01495b-ab4e-4bd8-8f8d-8326fea83e07"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e9807a0a-5b4f-4280-9d87-16bc0f36f750"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""54b658c0-7eaf-4264-86a9-940d3880c616"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a5ca3742-935e-4e46-a616-68d05953d1ca"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""779269ae-4a4d-4e75-b880-acd1f96e015d"",
                     ""path"": ""<Keyboard>/w"",
@@ -227,6 +291,39 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Xbox Controller"",
                     ""action"": ""Catch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3becf21f-7d02-47ad-ac62-83cf48359c5d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69359c65-dac6-473c-a391-5a54c981feea"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox Controller"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05221090-f2ed-4777-b4c2-7876807a7b7a"",
+                    ""path"": ""<SwitchProControllerHID>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Switch Controller"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -328,6 +425,7 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
         m_Fishing_Cancel = m_Fishing.FindAction("Cancel", throwIfNotFound: true);
         m_Fishing_Catch = m_Fishing.FindAction("Catch", throwIfNotFound: true);
         m_Fishing_Movecursor = m_Fishing.FindAction("Move cursor", throwIfNotFound: true);
+        m_Fishing_Pause = m_Fishing.FindAction("Pause", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_AddHookPower = m_Debug.FindAction("AddHookPower", throwIfNotFound: true);
@@ -397,6 +495,7 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
     private readonly InputAction m_Fishing_Cancel;
     private readonly InputAction m_Fishing_Catch;
     private readonly InputAction m_Fishing_Movecursor;
+    private readonly InputAction m_Fishing_Pause;
     public struct FishingActions
     {
         private @InputActionsAsset m_Wrapper;
@@ -405,6 +504,7 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
         public InputAction @Cancel => m_Wrapper.m_Fishing_Cancel;
         public InputAction @Catch => m_Wrapper.m_Fishing_Catch;
         public InputAction @Movecursor => m_Wrapper.m_Fishing_Movecursor;
+        public InputAction @Pause => m_Wrapper.m_Fishing_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Fishing; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -426,6 +526,9 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
             @Movecursor.started += instance.OnMovecursor;
             @Movecursor.performed += instance.OnMovecursor;
             @Movecursor.canceled += instance.OnMovecursor;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IFishingActions instance)
@@ -442,6 +545,9 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
             @Movecursor.started -= instance.OnMovecursor;
             @Movecursor.performed -= instance.OnMovecursor;
             @Movecursor.canceled -= instance.OnMovecursor;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IFishingActions instance)
@@ -546,6 +652,7 @@ public partial class @InputActionsAsset: IInputActionCollection2, IDisposable
         void OnCancel(InputAction.CallbackContext context);
         void OnCatch(InputAction.CallbackContext context);
         void OnMovecursor(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {
