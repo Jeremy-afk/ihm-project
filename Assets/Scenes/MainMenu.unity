@@ -953,6 +953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 568376812}
   - component: {fileID: 568376813}
+  - component: {fileID: 568376814}
   m_Layer: 0
   m_Name: Buttons
   m_TagString: Untagged
@@ -1008,6 +1009,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &568376814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568376811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2939eb52d7be29e409806d79c1703b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 761358856}
 --- !u!1 &675300159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,6 +1344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1055618535}
+  - component: {fileID: 1055618536}
   m_Layer: 0
   m_Name: DifficultyButtons
   m_TagString: Untagged
@@ -1358,6 +1373,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1055618536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055618534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2939eb52d7be29e409806d79c1703b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 1975885844}
 --- !u!1 &1070339845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,6 +1827,7 @@ MonoBehaviour:
   gameManager: {fileID: 34606976}
   difficultyMenu: {fileID: 1055618534}
   mainMenu: {fileID: 568376811}
+  dropdown: {fileID: 337151459}
 --- !u!114 &1134748393
 MonoBehaviour:
   m_ObjectHideFlags: 0
