@@ -181,13 +181,13 @@ MonoBehaviour:
   mainTheme: {fileID: 0}
   chaseTheme: {fileID: 0}
   winTheme: {fileID: 0}
-  menuSelect1: {fileID: 0}
+  menuSelect1: {fileID: 8300000, guid: db430dba5aef64f408a37c134d32c12f, type: 3}
   menuClick: {fileID: 0}
-  plouf: {fileID: 0}
-  fishBites: {fileID: 0}
+  plouf: {fileID: 8300000, guid: b38b505fae904d343b2d3fbd08f19192, type: 3}
+  fishBites: {fileID: 8300000, guid: 3b8c5ded74023ff43876ad393b2561b6, type: 3}
   fishDirectionChange: {fileID: 0}
   winSound: {fileID: 0}
-  gameOverSound: {fileID: 0}
+  gameOverSound: {fileID: 8300000, guid: 2755a519e58e3ab458d4f645c6e40edb, type: 3}
 --- !u!1 &8998701981771060757
 GameObject:
   m_ObjectHideFlags: 0
