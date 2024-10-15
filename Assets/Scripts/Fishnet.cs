@@ -1,10 +1,21 @@
+using System;
 using UnityEngine;
+
+[Serializable]
+public struct FishNetProperties
+{
+    public float maxTimeBelowZeroTolerance;
+    public float minTimeBelowZeroTolerance;
+    public float netMovingSpeed;
+    public float rateLoss;
+    public float rateOfLossClampingFactor;
+    public float rateOfGain;
+    public float rateOfGainClampingFactor;
+}
 
 public class FishNet : MonoBehaviour
 {
     private InputActionsAsset controls;
-
-    //[SerializeField] private Difficulty[] difficulties; deprecated
 
     [Space]
 
@@ -12,10 +23,10 @@ public class FishNet : MonoBehaviour
     [SerializeField] private float minTimeBelowZeroTolerance = 0.5f;
     [SerializeField] private float netMovingSpeed;
 
-    [SerializeField] private float rateOfLoss;
-    [SerializeField] private float rateOfLossClampingFactor = 1f;
-    [SerializeField] private float rateOfGain;
-    [SerializeField] private float rateOfGainClampingFactor = 1f;
+    [SerializeField] private float rateOfLoss = 0.15f;
+    [SerializeField] private float rateOfLossClampingFactor = 0f;
+    [SerializeField] private float rateOfGain = 0.15f;
+    [SerializeField] private float rateOfGainClampingFactor = 0f;
 
     [SerializeField] private BarVisual bar;
     [SerializeField] private Casting castingSystem;
@@ -56,37 +67,6 @@ public class FishNet : MonoBehaviour
         bar.SetValue(0.5f);
         fishCollider = GameObject.FindGameObjectWithTag("Fish").GetComponent<CapsuleCollider2D>();
         boxFishNetCollider = GetComponent<BoxCollider2D>();
-
-        print("Fetching difficulty...");
-        // Currently working to move this to the game loader
-        GameObject gameManagerGo = GameObject.Find("Game Manager");
-        if (gameManagerGo && gameManagerGo.TryGetComponent(out GameManager gameManager))
-        {
-            difficulty = gameManager.difficulty;
-        }
-        else
-        {
-            Debug.LogError("There is no game manager on the scene, or it doesn't have the game manager script. Also check the spelling: 'Game Manager'");
-        }
-
-        int difficultyLevel = 0;
-
-        switch (difficulty)
-        {
-            case GameManager.GameDifficulty.Hard:
-                difficultyLevel = 2;
-                break;
-            case GameManager.GameDifficulty.Medium:
-                difficultyLevel = 1;
-                break;
-            case GameManager.GameDifficulty.Easy:
-                difficultyLevel = 0;
-                break;
-        }
-
-        print("Requested difficulty " + difficultyLevel);
-
-        //LoadDifficulty(difficulties[difficultyLevel]); deprecated
     }
 
     private void Update()
@@ -102,10 +82,15 @@ public class FishNet : MonoBehaviour
         timeColliding += Time.deltaTime;
     }
 
-    private void LoadDifficulty(Difficulty difficulty)
+    public void SetFishNetProperties(FishNetProperties properties)
     {
-        // Deprecated
-        print("Loading difficulty " + difficulty.Name + "...");
+        maxTimeBelowZeroTolerance = properties.maxTimeBelowZeroTolerance;
+        minTimeBelowZeroTolerance = properties.minTimeBelowZeroTolerance;
+        netMovingSpeed = properties.netMovingSpeed;
+        rateOfLoss = properties.rateLoss;
+        rateOfLossClampingFactor = properties.rateOfLossClampingFactor;
+        rateOfGain = properties.rateOfGain;
+        rateOfGainClampingFactor = properties.rateOfGainClampingFactor;
     }
 
     private void ManageHookLevel()

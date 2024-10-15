@@ -1,12 +1,29 @@
+using System;
 using System.Collections;
-using System.Threading;
 using UnityEngine;
+
+[Serializable]
+public struct FishModifiers
+{
+    public bool useModifiers;
+
+    public float speedMultiplier;
+    public float speedChangeMultiplier;
+    public float varianceMultiplier;
+    public float baitMaxDurationMultiplier;
+
+    public FishModifiers(bool useModifiers = false, float speedMultiplier = 1f, float speedChangeMultiplier = 1f, float varianceMultiplier = 0f, float baitMaxDurationMultiplier = 1f)
+    {
+        this.useModifiers = useModifiers;
+        this.speedMultiplier = speedMultiplier;
+        this.speedChangeMultiplier = speedChangeMultiplier;
+        this.varianceMultiplier = varianceMultiplier;
+        this.baitMaxDurationMultiplier = baitMaxDurationMultiplier;
+    }
+} 
 
 public class Fish : MonoBehaviour
 {
-    //[SerializeField, Tooltip("Max time before the fish can escapes if the player do not (or badly) perform.")]
-
-
     private FishNet fishingNet;
 
     [SerializeField, Tooltip("Base time between direction changes during fleeing mode")] float changeDirectionTime = 2.5f;
@@ -36,7 +53,7 @@ public class Fish : MonoBehaviour
 
     private void Start()
     {
-        direction = new Vector3(Random.Range(-1f, 2f), Random.Range(-1f, 1f), 0);
+        direction = new Vector3(UnityEngine.Random.Range(-1f, 2f), UnityEngine.Random.Range(-1f, 1f), 0);
         timeLeft = changeDirectionTime;
     }
 
@@ -59,7 +76,7 @@ public class Fish : MonoBehaviour
     }
 
     // Makes the fish approach the position of the bait
-    public void SetBait(Casting castingSystem, FishNet fishingNet, Vector2 baitPosition)
+    public void SetBait(Casting castingSystem, FishNet fishingNet, Vector2 baitPosition, FishModifiers modifiers)
     {
         if (fishingNet != null && castingSystem != null)
         {
@@ -68,6 +85,14 @@ public class Fish : MonoBehaviour
             this.baitPosition = baitPosition;
             this.fishingNet = fishingNet;
             this.castingSystem = castingSystem;
+        }
+
+        if (modifiers.useModifiers)
+        {
+            fleeSpeed *= modifiers.speedMultiplier;
+            changeDirectionTime /= modifiers.speedChangeMultiplier;
+            baitMaxDuration *= modifiers.baitMaxDurationMultiplier;
+            variance *= modifiers.varianceMultiplier;
         }
     }
 
@@ -111,7 +136,7 @@ public class Fish : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
-            timeLeft += changeDirectionTime + Random.Range(-variance, variance);
+            timeLeft += changeDirectionTime + UnityEngine.Random.Range(-variance, variance);
             direction = new Vector3(listOfShame[random.Next(0, listOfShame.Length)], listOfShame[random.Next(0, listOfShame.Length)], 0);
         }
         MoveFish(fleeSpeed * Time.deltaTime * direction);
@@ -166,8 +191,8 @@ public class Fish : MonoBehaviour
 
         while (timer > 0) {
             Vector3 shake = new Vector3(
-                Random.Range(-1f, 1f) * shakeDirection.x,
-                Random.Range(-1f, 1f) * shakeDirection.y,
+                UnityEngine.Random.Range(-1f, 1f) * shakeDirection.x,
+                UnityEngine.Random.Range(-1f, 1f) * shakeDirection.y,
                 0
             );
             transform.position = basePosition + shake;

@@ -1,4 +1,19 @@
+using System;
 using UnityEngine;
+
+[Serializable]
+public struct FishPoolProperties
+{
+    public int maxFishes;
+    [Tooltip("Guarenteed distance between all the fishes in the pool upon spawning")]
+    public float minimumSpawnDistance;
+
+    public FishPoolProperties(int maxFishes = 10, float minimumSpawnDistance = 1.0f)
+    {
+        this.maxFishes = maxFishes;
+        this.minimumSpawnDistance = minimumSpawnDistance;
+    }
+}
 
 public class FishPool : MonoBehaviour
 {
@@ -8,11 +23,8 @@ public class FishPool : MonoBehaviour
     private bool spawnActiveFishes;
 
     [Space]
-
     [SerializeField]
-    private int maxFishes = 10;
-    [SerializeField, Tooltip("Guarenteed distance between all the fishes in the pool upon spawning")]
-    private float minimumSpawnDistance = 1.0f;
+    private FishPoolProperties fishPoolProperties;
     [SerializeField]
     private Collider2D spawnArea;
 
@@ -32,7 +44,15 @@ public class FishPool : MonoBehaviour
 
     private float m_minimumSpawnDistanceSqr;
     private Fish[] m_fishes;
+    private FishModifiers fishModifiers;
 
+    public void SetFishPoolProperties(FishPoolProperties fishPoolProperties, FishModifiers fishModifiers)
+    {
+        this.fishPoolProperties = fishPoolProperties;
+        this.fishModifiers = fishModifiers;
+
+        SpawnFishes();
+    }
 
     // Returns the closest fish to the given position within the given distance (otherwise returns null)
     public Fish PutBaitInPosition(Vector2 position, float maxDistance)
@@ -55,7 +75,7 @@ public class FishPool : MonoBehaviour
 
         if (selectedFish != null)
         {
-            selectedFish.SetBait(castingSystem, fishNet, position);
+            selectedFish.SetBait(castingSystem, fishNet, position, fishModifiers);
         }
 
         return selectedFish;
@@ -87,17 +107,15 @@ public class FishPool : MonoBehaviour
             return;
         }
 
-        m_minimumSpawnDistanceSqr = minimumSpawnDistance * minimumSpawnDistance;
-
-        SpawnFishes();
+        m_minimumSpawnDistanceSqr = fishPoolProperties.minimumSpawnDistance * fishPoolProperties.minimumSpawnDistance;
     }
 
     // Spawns all the fishes in the pool (using the fish prefab and serialized parameters)
     private void SpawnFishes()
     {
-        m_fishes = new Fish[maxFishes];
+        m_fishes = new Fish[fishPoolProperties.maxFishes];
 
-        for (int i = 0; i < maxFishes; i++)
+        for (int i = 0; i < fishPoolProperties.maxFishes; i++)
         {
             m_fishes[i] = SpawnOneFish();
             if (m_fishes[i] == null && stopOnFirstFail)
@@ -126,8 +144,8 @@ public class FishPool : MonoBehaviour
         do
         {
             spawnPosition = new Vector3(
-                Random.Range(spawnArea.bounds.min.x, spawnArea.bounds.max.x),
-                Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y),
+                UnityEngine.Random.Range(spawnArea.bounds.min.x, spawnArea.bounds.max.x),
+                UnityEngine.Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y),
                 0
             );
 

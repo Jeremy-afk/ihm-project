@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3a247585ea1ec41b2582cdb6d3d387, type: 3}
+  m_Name: 2-MediumDifficulty
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Medium
+  <FishPoolProperties>k__BackingField:
+    maxFishes: 10
+    minimumSpawnDistance: 2
+  <FishNetProperties>k__BackingField:
+    maxTimeBelowZeroTolerance: 0.5
+    minTimeBelowZeroTolerance: 0.3
+    netMovingSpeed: 7
+    rateLoss: 0.2
+    rateOfLossClampingFactor: 0
+    rateOfGain: 0.1
+    rateOfGainClampingFactor: 0
+  <CastingProperties>k__BackingField:
+    baitMaxDistance: 2
+    rotationSpeed: 2
+    forceSpeed: 2
+  <FishModifiers>k__BackingField:
+    useModifiers: 1
+    speedMultiplier: 1.2
+    speedChangeMultiplier: 1.2
+    varianceMultiplier: 1.2
+    baitMaxDurationMultiplier: 0.5

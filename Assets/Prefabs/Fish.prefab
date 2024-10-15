@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cacb95e146696045b49705fc9f19d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeDirectionTime: 2
-  variance: 0
+  changeDirectionTime: 2.5
+  variance: 0.2
   approachSpeed: 0.5
   fleeSpeed: 2.5
   baitMaxDuration: 1.5

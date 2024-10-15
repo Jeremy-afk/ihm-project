@@ -1,7 +1,23 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+
+[Serializable]
+public struct CastingProperties
+{
+    public float baitMaxDistance;
+    public float rotationSpeed;
+    public float forceSpeed;
+
+    public CastingProperties(float baitMaxDistance = 2f, float rotationSpeed = 2f, float forceSpeed = 2f)
+    {
+        this.baitMaxDistance = baitMaxDistance;
+        this.rotationSpeed = rotationSpeed;
+        this.forceSpeed = forceSpeed;
+    }
+}
 
 public class Casting : MonoBehaviour
 {
@@ -117,6 +133,12 @@ public class Casting : MonoBehaviour
     }
 
     #region Public Methods
+    public void SetCastingProperties(CastingProperties properties)
+    {
+        baitMaxDistance = properties.baitMaxDistance;
+        rotationSpeed = properties.rotationSpeed;
+        forceSpeed = properties.forceSpeed;
+    }
 
     public Vector2 GetNetPosition()
     {
