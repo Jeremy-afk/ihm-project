@@ -3,7 +3,20 @@ guid: f3c8edc9f23bbd4429aeb810298393e2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - musicSource: {instanceID: 0}
+  - soundEffectSource: {instanceID: 0}
+  - soundEffectLoopSource: {instanceID: 0}
+  - mainTheme: {instanceID: 0}
+  - chaseTheme: {instanceID: 0}
+  - winTheme: {instanceID: 0}
+  - menuSelect1: {instanceID: 0}
+  - menuClick: {instanceID: 0}
+  - plouf: {instanceID: 0}
+  - fishBites: {instanceID: 0}
+  - fishDirectionChange: {instanceID: 0}
+  - winSound: {instanceID: 0}
+  - gameOverSound: {fileID: 8300000, guid: 2755a519e58e3ab458d4f645c6e40edb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
