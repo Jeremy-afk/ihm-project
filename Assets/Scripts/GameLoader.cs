@@ -17,16 +17,10 @@ public class GameLoader : MonoBehaviour
     private Difficulty currentDifficulty;
     private GameManager gameManager;
 
-    private IEnumerator Start()
+    private void Start()
     {
-        Debug.Log("STARTING: " + GetInstanceID(), gameObject);
-
         gameManager = GameManager.Instance;
-
-        yield return new WaitForEndOfFrame();
-
         currentDifficulty = FetchDifficulty();
-
         LoadDifficulty(currentDifficulty);
     }
 
@@ -56,11 +50,6 @@ public class GameLoader : MonoBehaviour
             }
             difficulty = defaultDifficulty;
         }
-
-        Debug.Log("Loading difficulty " + difficulty.Name);
-
-        print(difficulty);
-        print(fishNet);
 
         // Load the fishnet
         fishNet.SetFishNetProperties(difficulty.FishNetProperties);
