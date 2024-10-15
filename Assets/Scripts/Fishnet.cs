@@ -53,6 +53,7 @@ public class FishNet : MonoBehaviour
         fishCollider = GameObject.FindGameObjectWithTag("Fish").GetComponent<CapsuleCollider2D>();
         boxFishNetCollider = GetComponent<BoxCollider2D>();
 
+        /*
         difficulty = GameObject.Find("Game Manager").GetComponent<GameManager>().difficulty;
 
         if(difficulty == GameManager.GameDifficulty.Easy)
@@ -67,6 +68,7 @@ public class FishNet : MonoBehaviour
         {
 
         }
+        */
     }
 
     private void Update()
