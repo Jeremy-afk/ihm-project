@@ -14,12 +14,12 @@ public class GameSettingsManager : MonoBehaviour
     [Header("Graphics Settings")]
     public Toggle fullscreenToggle;
 
-    void Start()
+    private void Start()
     {
         LoadSettings();
     }
 
-    void LoadSettings()
+    private void LoadSettings()
     {
         masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
@@ -51,6 +51,7 @@ public class GameSettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
         PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
         PlayerPrefs.Save();
+        print("Saved");
     }
 
     public void ApplyGraphicsSettings()
@@ -61,6 +62,7 @@ public class GameSettingsManager : MonoBehaviour
         // Save settings
         PlayerPrefs.SetInt("Fullscreen", fullscreenToggle.isOn ? 1 : 0);
         PlayerPrefs.Save();
+        print("Saved");
     }
 
     public void OnVolumeChanged()

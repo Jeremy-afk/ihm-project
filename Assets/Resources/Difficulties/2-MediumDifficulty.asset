@@ -18,7 +18,7 @@ MonoBehaviour:
     minimumSpawnDistance: 2
   <FishNetProperties>k__BackingField:
     maxTimeBelowZeroTolerance: 0.5
-    minTimeBelowZeroTolerance: 0.3
+    minTimeBelowZeroTolerance: 0.5
     netMovingSpeed: 7
     rateLoss: 0.2
     rateOfLossClampingFactor: 0
@@ -30,8 +30,8 @@ MonoBehaviour:
     forceSpeed: 2
   <FishModifiers>k__BackingField:
     useModifiers: 1
-    speedMultiplier: 1.3
-    speedChangeMultiplier: 1.2
-    varianceMultiplier: 1.2
-    baitMaxDurationMultiplier: 0.5
-    minMagnitude: 0.2
+    speedMultiplier: 1.6
+    speedChangeMultiplier: 1.5
+    varianceMultiplier: 0.5
+    baitMaxDurationMultiplier: 0.8
+    minMagnitude: 0.8

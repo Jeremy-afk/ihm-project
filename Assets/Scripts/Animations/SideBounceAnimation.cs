@@ -12,9 +12,12 @@ public class FishAnimation : MonoBehaviour
     private Anchor anchorDirection = Anchor.Right;
     [SerializeField]
     private float frequency = 1f;
+    [SerializeField]
+    private bool ignoreTimeScale = false;
 
     private float baseXPosition = 0f;
     private float timeOffset;
+    private float timer = 0;
 
     private enum Anchor
     {
@@ -23,7 +26,7 @@ public class FishAnimation : MonoBehaviour
         Middle
     }
 
-    void Start()
+    private void Start()
     {
         // Store the initial X position of the fish (in case it's not at 0)
         if (icon != null)
@@ -35,9 +38,9 @@ public class FishAnimation : MonoBehaviour
         timeOffset = Random.Range(0f, Mathf.PI * 2f);
     }
 
-    void Update()
+    private void Update()
     {
-        float value = Mathf.Sin(Time.time * frequency + timeOffset);
+        float value = Mathf.Sin(timer * frequency + timeOffset);
         float motion = Mathf.Abs(value);
         if (invertMotion) motion = 1 - motion;
 
@@ -65,5 +68,7 @@ public class FishAnimation : MonoBehaviour
             newPosition.x = baseXPosition + anchorOffset + motion;
             icon.anchoredPosition = newPosition;
         }
+
+        timer += ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime;
     }
 }

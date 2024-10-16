@@ -14,24 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: God
   <FishPoolProperties>k__BackingField:
-    maxFishes: 10
-    minimumSpawnDistance: 1
+    maxFishes: 3
+    minimumSpawnDistance: 5
   <FishNetProperties>k__BackingField:
-    maxTimeBelowZeroTolerance: 0.5
-    minTimeBelowZeroTolerance: 0.3
-    netMovingSpeed: 7
-    rateLoss: 0.2
+    maxTimeBelowZeroTolerance: 0.4
+    minTimeBelowZeroTolerance: 0.1
+    netMovingSpeed: 8
+    rateLoss: 0.24
     rateOfLossClampingFactor: 0
-    rateOfGain: 0.1
+    rateOfGain: 0.11
     rateOfGainClampingFactor: 0
   <CastingProperties>k__BackingField:
     baitMaxDistance: 1
-    rotationSpeed: 2.5
-    forceSpeed: 2.5
+    rotationSpeed: 3
+    forceSpeed: 3
   <FishModifiers>k__BackingField:
     useModifiers: 1
-    speedMultiplier: 1.6
+    speedMultiplier: 2
     speedChangeMultiplier: 3
     varianceMultiplier: 3
-    baitMaxDurationMultiplier: 0.1
+    baitMaxDurationMultiplier: 0.15
     minMagnitude: 0.8

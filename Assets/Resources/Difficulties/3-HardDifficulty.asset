@@ -20,18 +20,18 @@ MonoBehaviour:
     maxTimeBelowZeroTolerance: 0.5
     minTimeBelowZeroTolerance: 0.3
     netMovingSpeed: 7
-    rateLoss: 0.2
+    rateLoss: 0.22
     rateOfLossClampingFactor: 0
     rateOfGain: 0.1
     rateOfGainClampingFactor: 0
   <CastingProperties>k__BackingField:
     baitMaxDistance: 1.5
-    rotationSpeed: 2
-    forceSpeed: 2
+    rotationSpeed: 2.5
+    forceSpeed: 2.5
   <FishModifiers>k__BackingField:
     useModifiers: 1
-    speedMultiplier: 1.6
+    speedMultiplier: 1.8
     speedChangeMultiplier: 2
-    varianceMultiplier: 3
+    varianceMultiplier: 1.5
     baitMaxDurationMultiplier: 0.3
-    minMagnitude: 0.4
+    minMagnitude: 0.8

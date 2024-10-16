@@ -34,3 +34,4 @@ MonoBehaviour:
     speedChangeMultiplier: 1
     varianceMultiplier: 0
     baitMaxDurationMultiplier: 1
+    minMagnitude: 0.5

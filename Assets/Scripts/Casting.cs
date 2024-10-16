@@ -226,6 +226,8 @@ public class Casting : MonoBehaviour
 
     private void OnCasting(InputAction.CallbackContext context)
     {
+        if (isGamePaused) return;
+
         switch (castingState)
         {
             case CastingState.Initial:
@@ -309,17 +311,35 @@ public class Casting : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext context)
     {
+        if (isGamePaused)
+            Unpause();
+        else
+            Pause();
+    }
+
+    public void Pause()
+    {
         if(!isGamePaused)
         {
             pauseMenu.SetActive(true);
             isGamePaused = !isGamePaused;
             Time.timeScale = 0;
         }
-        else
+    }
+
+    public void Unpause()
+    {
+        if (isGamePaused)
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
             isGamePaused = !isGamePaused;
         }
+    }
+
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 }

@@ -59,8 +59,7 @@ public class Fish : MonoBehaviour
 
     private void Start()
     {
-        direction = new Vector3(UnityEngine.Random.Range(-1f, 2f), UnityEngine.Random.Range(-1f, 1f), 0);
-        timeLeft = changeDirectionTime;
+        timeLeft = -1; // So it updates immediatly
     }
 
     private void Update()
@@ -100,6 +99,8 @@ public class Fish : MonoBehaviour
             baitMaxDuration *= modifiers.baitMaxDurationMultiplier;
             variance *= modifiers.varianceMultiplier;
             minMagnitude = modifiers.minMagnitude;
+
+            print("Fish max speed is " + fleeSpeed);
         }
     }
 
@@ -152,22 +153,21 @@ public class Fish : MonoBehaviour
 
             // Alternative random system (allows for all real directions)
             float randomAngle = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
-            direction = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0) * UnityEngine.Random.Range(minMagnitude, 1f);
+            direction = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0) * UnityEngine.Random.Range(minMagnitude * fleeSpeed, fleeSpeed);
+
+            print($"New speed: {direction.magnitude}");
 
             // Rest of this code is only useful if the original random system is used
 
             //float magnitude = direction.magnitude;
 
-            //print("before: " + magnitude);
-
             //if (magnitude < minMagnitude)
             //{
             //    direction *= minMagnitude/magnitude;
             //}
-
-            //print("after correction: " + magnitude);
         }
-        MoveFish(fleeSpeed * Time.deltaTime * direction);
+
+        MoveFish(Time.deltaTime * direction);
     }
 
     // The fish bites the bait (notifies the fishing rod)

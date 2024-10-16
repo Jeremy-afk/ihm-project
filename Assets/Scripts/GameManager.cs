@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -22,9 +23,8 @@ public class GameManager : MonoBehaviour
     {
         if (Instance)
         {
-            Debug.LogWarning("An instance of game manager already exists ! Disabling...");
-            gameObject.SetActive(false);
-            return;
+            Debug.LogWarning("An instance of game manager already exists ! Overwriting...");
+            Destroy(Instance.gameObject);
         }
 
         Instance = this;
