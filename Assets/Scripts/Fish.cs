@@ -151,16 +151,21 @@ public class Fish : MonoBehaviour
             //direction = new Vector3(listOfShame[random.Next(0, listOfShame.Length)], listOfShame[random.Next(0, listOfShame.Length)], 0);
 
             // Alternative random system (allows for all real directions)
-            direction = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0);
+            float randomAngle = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
+            direction = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0) * UnityEngine.Random.Range(minMagnitude, 1f);
 
-            float magnitude = direction.magnitude;
+            // Rest of this code is only useful if the original random system is used
 
-            if (magnitude < minMagnitude)
-            {
-                direction *= minMagnitude/magnitude;
-            }
+            //float magnitude = direction.magnitude;
 
-            print(magnitude);
+            //print("before: " + magnitude);
+
+            //if (magnitude < minMagnitude)
+            //{
+            //    direction *= minMagnitude/magnitude;
+            //}
+
+            //print("after correction: " + magnitude);
         }
         MoveFish(fleeSpeed * Time.deltaTime * direction);
     }

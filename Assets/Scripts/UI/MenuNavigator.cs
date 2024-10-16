@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class MenuNavigator : MonoBehaviour
 {
     [SerializeField]
-    private Button firstSelected;
-    [SerializeField]
     private RectTransform fishIcon;
     [SerializeField]
     private float offsetX = 50f;
@@ -27,22 +25,8 @@ public class MenuNavigator : MonoBehaviour
         // Wait a bit before setting the first selected button to let the UI EventSystem initialize
         yield return new WaitForEndOfFrame();
 
-        if (firstSelected != null)
-        {
-            EventSystem.current.SetSelectedGameObject(firstSelected.gameObject);
-            lastSelectedButton = EventSystem.current.currentSelectedGameObject;
-
-            currentButtonRect = lastSelectedButton.GetComponent<RectTransform>();
-            targetPosition = new Vector3(currentButtonRect.position.x - offsetX, currentButtonRect.position.y, currentButtonRect.position.z);
-            fishIcon.position = targetPosition;
-            fishIcon.gameObject.SetActive(true);
-
-            initialized = true;
-        }
-        else
-        {
-            Debug.LogWarning("No default button chosen !");
-        }
+        fishIcon.gameObject.SetActive(true);
+        initialized = true;
     }
 
     private void Update()
@@ -53,6 +37,8 @@ public class MenuNavigator : MonoBehaviour
 
         if (selectedButton != null && selectedButton != lastSelectedButton)
         {
+            print(selectedButton.name);
+
             // This getcomponent call in update is expensive but since it's only called once when the selected button changes, it's fine
             currentButtonRect = selectedButton.GetComponent<RectTransform>();
             

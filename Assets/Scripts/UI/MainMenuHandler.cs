@@ -1,22 +1,19 @@
-using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MainMenuHandler : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject startMenu;
-    [SerializeField]
-    private string mainGameSceneName;
+    [Header("Menus")]
+    [SerializeField] private GameObject mainButtons;
+    [SerializeField] private GameObject difficultyButtons;
+    [SerializeField] private GameObject settingsButtons;
 
+    [Header("Game Launch")]
+    [SerializeField] private string mainGameSceneName;
+
+    [Space]
     [SerializeField] private GameManager gameManager;
-
-    [SerializeField] private GameObject difficultyMenu;
-    [SerializeField] private GameObject mainMenu;
-
     [SerializeField] private TMP_Dropdown dropdown;
 
     private void Start()
@@ -44,14 +41,21 @@ public class MainMenuHandler : MonoBehaviour
 
     public void DifficultyButton()
     {
-        mainMenu.SetActive(false);
-        difficultyMenu.SetActive(true);
+        mainButtons.SetActive(false);
+        difficultyButtons.SetActive(true);
     }
 
-    public void BackDifficultyButton()
+    public void SettingsButton()
     {
-        mainMenu.SetActive(true);
-        difficultyMenu.SetActive(false);
+        mainButtons.SetActive(false);
+        settingsButtons.SetActive(true);
+    }
+
+    public void BackMainButtons()
+    {
+        mainButtons.SetActive(true);
+        difficultyButtons.SetActive(false);
+        settingsButtons.SetActive(false);
     }
 
     // Unused for now -- see GameManager.SetDifficulty(Int32)
