@@ -30,7 +30,8 @@ MonoBehaviour:
     forceSpeed: 2
   <FishModifiers>k__BackingField:
     useModifiers: 1
-    speedMultiplier: 1.3
+    speedMultiplier: 1.6
     speedChangeMultiplier: 2
     varianceMultiplier: 3
     baitMaxDurationMultiplier: 0.3
+    minMagnitude: 0.4
