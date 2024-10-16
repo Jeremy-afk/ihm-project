@@ -294,6 +294,7 @@ public class Casting : MonoBehaviour
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
         notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0);
+        AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.gameOverSound);
         castingState = CastingState.GameOver;
     }
 

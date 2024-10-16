@@ -46,7 +46,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -178,7 +178,8 @@ MonoBehaviour:
   musicSource: {fileID: 2806853965581343948}
   soundEffectSource: {fileID: 799513485848771121}
   soundEffectLoopSource: {fileID: 5406169547212176452}
-  mainTheme: {fileID: 0}
+  menuTheme: {fileID: 0}
+  mainTheme: {fileID: 8300000, guid: 309736f9106de2c47a2a895d4eb477f2, type: 3}
   chaseTheme: {fileID: 0}
   winTheme: {fileID: 0}
   menuSelect1: {fileID: 8300000, guid: db430dba5aef64f408a37c134d32c12f, type: 3}
@@ -234,7 +235,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -362,7 +363,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

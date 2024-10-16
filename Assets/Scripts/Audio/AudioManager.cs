@@ -3,7 +3,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     // Audio manager is a singleton that will be used to play sound effects
-    public static AudioManager instance;
+    public static AudioManager Instance { get; private set; }
 
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource soundEffectSource;
@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     // All audio clips (public so accessible from other scripts)
     [Header("Musics")]
+    public AudioClip menuTheme;
     public AudioClip mainTheme;
     public AudioClip chaseTheme;
     public AudioClip winTheme;
@@ -27,9 +28,9 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         // Singleton pattern
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
