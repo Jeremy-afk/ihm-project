@@ -162,10 +162,6 @@ PrefabInstance:
       propertyPath: musicSources.Array.data[0]
       value: 
       objectReference: {fileID: 376586300}
-    - target: {fileID: 4825641774951990929, guid: 004bf3741b16cc340a15d18ef4ee5b8a, type: 3}
-      propertyPath: selectedDifficulty
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6050392801800060708, guid: 004bf3741b16cc340a15d18ef4ee5b8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 958.1616
@@ -3186,6 +3182,7 @@ MonoBehaviour:
   fishIcon: {fileID: 1317011446}
   globalOffsetX: 50
   transitionSpeed: 20
+  ignoreTimeScale: 0
 --- !u!114 &1134748392
 MonoBehaviour:
   m_ObjectHideFlags: 0
