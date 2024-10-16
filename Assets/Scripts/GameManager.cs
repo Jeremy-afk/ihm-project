@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
         return difficulties[index];
     }
 
-    public void SetDifficulty(int difficultyIndex)
+    public void SetDifficulty(Int32 difficultyIndex)
     {
         selectedDifficulty = (GameDifficulty)difficultyIndex;
     }
