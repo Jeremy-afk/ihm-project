@@ -4,15 +4,15 @@ using UnityEngine.UI;
 public class GameSettingsManager : MonoBehaviour
 {
     [Header("Audio Settings")]
-    public Slider masterVolumeSlider;
-    public Slider musicVolumeSlider;
-    public Slider sfxVolumeSlider;
+    [SerializeField] private Slider masterVolumeSlider;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider sfxVolumeSlider;
+    [Space]
+    [SerializeField] private AudioSource[] musicSources;
+    [SerializeField] private AudioSource[] sfxSources;
 
     [Header("Graphics Settings")]
     public Toggle fullscreenToggle;
-
-    private AudioSource[] musicSources;
-    private AudioSource[] sfxSources;
 
     void Start()
     {
@@ -25,7 +25,7 @@ public class GameSettingsManager : MonoBehaviour
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
 
-        fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen", 1) == 1 ? true : false;
+        fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
 
         ApplyAudioSettings();
         ApplyGraphicsSettings();
@@ -36,17 +36,15 @@ public class GameSettingsManager : MonoBehaviour
         // Apply volume levels to game audio
         AudioListener.volume = masterVolumeSlider.value;
 
-        // TODO: LINK THE AUDIO SOURCES VOLUMES (create function set volume or idk in the audio manager that will be called here)
-        // Optionally, apply to specific music/SFX sources
-        //foreach (var musicSource in musicSources)
-        //{
-        //    musicSource.volume = musicVolumeSlider.value;
-        //}
+        foreach (var musicSource in musicSources)
+        {
+            musicSource.volume = musicVolumeSlider.value;
+        }
 
-        //foreach (var sfxSource in sfxSources)
-        //{
-        //    sfxSource.volume = sfxVolumeSlider.value;
-        //}
+        foreach (var sfxSource in sfxSources)
+        {
+            sfxSource.volume = sfxVolumeSlider.value;
+        }
 
         // Save settings
         PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);

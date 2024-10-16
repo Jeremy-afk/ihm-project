@@ -64,7 +64,6 @@ public class ButtonSound : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     // Call this when the button is clicked/validated
     public void PlayClickSound()
     {
-        print("click!");
         if (!playClick || !ready) return;
 
         if (useDefaultSounds)

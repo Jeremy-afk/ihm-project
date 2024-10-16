@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class MenuNavigator : MonoBehaviour
 {
@@ -40,8 +39,6 @@ public class MenuNavigator : MonoBehaviour
 
         if (selectedButton != null && selectedButton != lastSelectedButton)
         {
-            print(selectedButton.name);
-
             // This getcomponent call in update is expensive but since it's only called once when the selected button changes, it's fine
             currentButtonRect = selectedButton.GetComponent<RectTransform>();
 
