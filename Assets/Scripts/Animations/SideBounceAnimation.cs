@@ -9,11 +9,19 @@ public class FishAnimation : MonoBehaviour
     [SerializeField]
     private bool invertMotion = false;
     [SerializeField]
-    private float frequency = 1f;
+    private Anchor anchorDirection = Anchor.Right;
     [SerializeField]
-    private float baseXPosition = 0f;
+    private float frequency = 1f;
 
+    private float baseXPosition = 0f;
     private float timeOffset;
+
+    private enum Anchor
+    {
+        Left,
+        Right,
+        Middle
+    }
 
     void Start()
     {
@@ -29,13 +37,32 @@ public class FishAnimation : MonoBehaviour
 
     void Update()
     {
-        float value = Mathf.Sin(Time.time * frequency + timeOffset) * amplitude;
-        float motion = Mathf.Abs(value) * (invertMotion ? -1 : 1);
+        float value = Mathf.Sin(Time.time * frequency + timeOffset);
+        float motion = Mathf.Abs(value);
+        if (invertMotion) motion = 1 - motion;
+
+        float anchorOffset = 0;
+
+        switch (anchorDirection)
+        {
+            case Anchor.Left:
+                anchorOffset = icon.rect.width / 2;
+                break;
+            case Anchor.Right:
+                anchorOffset = - icon.rect.width / 2;
+                motion *= -1;
+                break;
+            case Anchor.Middle:
+                motion -= .5f;
+                break;
+        }
+
+        motion *= amplitude;
 
         if (icon != null)
         {
             Vector2 newPosition = icon.anchoredPosition;
-            newPosition.x = baseXPosition + motion;
+            newPosition.x = baseXPosition + anchorOffset + motion;
             icon.anchoredPosition = newPosition;
         }
     }

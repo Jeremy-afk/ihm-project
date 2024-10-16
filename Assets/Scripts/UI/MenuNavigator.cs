@@ -8,7 +8,7 @@ public class MenuNavigator : MonoBehaviour
     [SerializeField]
     private RectTransform fishIcon;
     [SerializeField]
-    private float offsetX = 50f;
+    private float globalOffsetX = 50f;
     [SerializeField]
     private float transitionSpeed = 10f;
 
@@ -18,10 +18,13 @@ public class MenuNavigator : MonoBehaviour
 
     private bool initialized = false;
 
-    private IEnumerator Start()
+    private void Awake()
     {
         fishIcon.gameObject.SetActive(false);
+    }
 
+    private IEnumerator Start()
+    {
         // Wait a bit before setting the first selected button to let the UI EventSystem initialize
         yield return new WaitForEndOfFrame();
 
@@ -41,8 +44,18 @@ public class MenuNavigator : MonoBehaviour
 
             // This getcomponent call in update is expensive but since it's only called once when the selected button changes, it's fine
             currentButtonRect = selectedButton.GetComponent<RectTransform>();
-            
-            targetPosition = new Vector3(currentButtonRect.position.x - offsetX, currentButtonRect.position.y, currentButtonRect.position.z);
+
+            targetPosition = new Vector3(currentButtonRect.position.x - globalOffsetX, currentButtonRect.position.y, currentButtonRect.position.z);
+
+            // Also take into account the selected button's semi-width
+            if (currentButtonRect.TryGetComponent(out SelectionnableElement element))
+            {
+                targetPosition -= new Vector3(element.GetElementSemiWidth(), 0, 0);
+            }
+            else
+                Debug.LogWarning("No selectable component on " + currentButtonRect.gameObject.name, currentButtonRect.gameObject);
+
+
             lastSelectedButton = selectedButton;
         }
 
