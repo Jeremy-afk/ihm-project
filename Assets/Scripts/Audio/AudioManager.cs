@@ -38,6 +38,13 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Load audio data
+        menuSelect1.LoadAudioData();
+
+    }
+
     // Classic function controls
 
     public void PlayMusic(AudioClip music = null, bool forceRestart = false)

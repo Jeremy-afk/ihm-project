@@ -11,14 +11,17 @@ public struct FishModifiers
     public float speedChangeMultiplier;
     public float varianceMultiplier;
     public float baitMaxDurationMultiplier;
+    [Space, Range(0f, 1f), Tooltip("Forces the fish to have a minimum speed.\n0 means no magnitude forcing.\n1 means full speed each time.")]
+    public float minMagnitude;
 
-    public FishModifiers(bool useModifiers = false, float speedMultiplier = 1f, float speedChangeMultiplier = 1f, float varianceMultiplier = 0f, float baitMaxDurationMultiplier = 1f)
+    public FishModifiers(bool useModifiers = false, float speedMultiplier = 1f, float speedChangeMultiplier = 1f, float varianceMultiplier = 0f, float baitMaxDurationMultiplier = 1f, float minMagnitude = 0f)
     {
         this.useModifiers = useModifiers;
         this.speedMultiplier = speedMultiplier;
         this.speedChangeMultiplier = speedChangeMultiplier;
         this.varianceMultiplier = varianceMultiplier;
         this.baitMaxDurationMultiplier = baitMaxDurationMultiplier;
+        this.minMagnitude = minMagnitude;
     }
 } 
 
@@ -32,6 +35,8 @@ public class Fish : MonoBehaviour
     [SerializeField] private float fleeSpeed = 1.5f;
     [SerializeField, Tooltip("How much time can the player take before the fishes finishes the bait and goes away")]
     private float baitMaxDuration = 1.2f;
+    [SerializeField] private bool forceMinMagnitude = false;
+    [SerializeField] private float minMagnitude = 0f;
 
     [Header("Animation")]
     [SerializeField] private float animationSpeed;
@@ -41,8 +46,9 @@ public class Fish : MonoBehaviour
     private float timeLeft;
     private Vector2 baitPosition;
     private Vector3 direction = Vector3.zero;
-    private int[] listOfShame = new int[] { -1, 0, 1 };
-    private readonly System.Random random = new System.Random();
+
+    private readonly int[] listOfShame = new int[] { -1, 0, 1 };
+    private readonly System.Random random = new();
 
     private bool isFleeing = false;
     private bool isEatingBait = false;
@@ -93,6 +99,7 @@ public class Fish : MonoBehaviour
             changeDirectionTime /= modifiers.speedChangeMultiplier;
             baitMaxDuration *= modifiers.baitMaxDurationMultiplier;
             variance *= modifiers.varianceMultiplier;
+            minMagnitude = modifiers.minMagnitude;
         }
     }
 
@@ -136,8 +143,24 @@ public class Fish : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
+            // Choose a new direction
+
             timeLeft += changeDirectionTime + UnityEngine.Random.Range(-variance, variance);
-            direction = new Vector3(listOfShame[random.Next(0, listOfShame.Length)], listOfShame[random.Next(0, listOfShame.Length)], 0);
+
+            // Original random system (allows 9 fixed directions)
+            //direction = new Vector3(listOfShame[random.Next(0, listOfShame.Length)], listOfShame[random.Next(0, listOfShame.Length)], 0);
+
+            // Alternative random system (allows for all real directions)
+            direction = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0);
+
+            float magnitude = direction.magnitude;
+
+            if (magnitude < minMagnitude)
+            {
+                direction *= minMagnitude/magnitude;
+            }
+
+            print(magnitude);
         }
         MoveFish(fleeSpeed * Time.deltaTime * direction);
     }

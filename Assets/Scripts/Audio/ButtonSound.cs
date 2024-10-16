@@ -8,7 +8,8 @@ public class ButtonSound : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 
     [Space]
 
-    [SerializeField] private bool playHover = true;
+    [SerializeField] private bool playOnHover = true;
+    [SerializeField] private bool playOnSelect = true;
     [SerializeField] private AudioClip hoverSound;
     [SerializeField] private bool playClick = true;
     [SerializeField] private AudioClip clickSound;
@@ -19,8 +20,6 @@ public class ButtonSound : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     private void Start()
     {
         audioManager = AudioManager.Instance;
-
-        print(audioManager);
 
         if (!audioManager)
         {
@@ -35,7 +34,7 @@ public class ButtonSound : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     // This is called when the button is selected (using a controller or keyboard navigation)
     public void OnSelect(BaseEventData eventData)
     {
-        if (!playHover || !ready) return;
+        if (!playOnSelect || !ready) return;
 
         if (useDefaultSounds)
         {
@@ -50,7 +49,7 @@ public class ButtonSound : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     // This is called when the button is hovered (using a mouse)
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!playHover || !ready) return;
+        if (!playOnHover || !ready) return;
 
         if (useDefaultSounds)
         {

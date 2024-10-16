@@ -152,6 +152,7 @@ public class Casting : MonoBehaviour
 
     public void FishBitesBait()
     {
+        AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.fishBites);
         castingState = CastingState.FishBitingBait;
         CreateHookEvent();
     }

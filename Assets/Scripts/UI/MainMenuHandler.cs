@@ -28,7 +28,7 @@ public class MainMenuHandler : MonoBehaviour
 
         if (dropdown != null)
         {
-            dropdown.onValueChanged.AddListener(OnDifficultyChange);
+            dropdown.onValueChanged.AddListener(OnDifficultyChange); // Not useful for the moment
         }
     }
 
@@ -54,6 +54,7 @@ public class MainMenuHandler : MonoBehaviour
         difficultyMenu.SetActive(false);
     }
 
+    // Unused for now -- see GameManager.SetDifficulty(Int32)
     private void OnDifficultyChange(int index)
     {
         if (gameManager != null)

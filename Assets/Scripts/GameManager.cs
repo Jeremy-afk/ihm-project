@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         return difficulties[index];
     }
 
+    // Called automatically by the dropdown on value changed.
     public void SetDifficulty(Int32 difficultyIndex)
     {
         selectedDifficulty = (GameDifficulty)difficultyIndex;
