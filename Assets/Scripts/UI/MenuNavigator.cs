@@ -51,10 +51,6 @@ public class MenuNavigator : MonoBehaviour
 
             targetPosition = new Vector3(currentButtonRect.position.x - globalOffsetX, currentButtonRect.position.y, currentButtonRect.position.z);
 
-            print($"target button is {targetPosition}");
-            Debug.Log($"Fish is at {fishIcon.transform.position}", fishIcon.gameObject);
-           
-
             // Also take into account the selected button's semi-width
             if (currentButtonRect.TryGetComponent(out SelectionnableElement element))
             {
