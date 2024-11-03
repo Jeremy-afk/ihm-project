@@ -53,8 +53,10 @@ public class GameLoader : MonoBehaviour
             difficulty = defaultDifficulty;
         }
 
+        bool contextualHelp = difficulty.displayContextualHelp;
+
         // Load the fishnet
-        fishNet.SetFishNetProperties(difficulty.FishNetProperties);
+        fishNet.SetFishNetProperties(difficulty.FishNetProperties, contextualHelp);
         fishPool.SetFishPoolProperties(difficulty.FishPoolProperties, difficulty.FishModifiers);
         fishRoad.SetCastingProperties(difficulty.CastingProperties);
 

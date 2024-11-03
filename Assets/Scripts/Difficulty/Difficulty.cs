@@ -16,4 +16,8 @@ public class Difficulty : ScriptableObject
     [field: Header("Global fishes properties")]
     [field: SerializeField]
     public FishModifiers FishModifiers { get; private set; }
+
+    [field: Header("Context Help")]
+    [field: SerializeField]
+    public bool displayContextualHelp { get; private set; }
 }

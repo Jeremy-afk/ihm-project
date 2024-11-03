@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -30,11 +31,14 @@ public class FishNet : MonoBehaviour
 
     [SerializeField] private BarVisual bar;
     [SerializeField] private Casting castingSystem;
+    [SerializeField] private NotificationAlert contextualHelpMoveBottom;
+    [SerializeField] private NotificationAlert contextualHelpMoveUp;
 
     private Vector2 direction;
     private CapsuleCollider2D fishCollider;
     private BoxCollider2D boxFishNetCollider;
     private SpriteRenderer spriteRenderer;
+    
 
     private float timeColliding = 0f;
     private float hookLevel = 0.5f;
@@ -42,6 +46,7 @@ public class FishNet : MonoBehaviour
     private bool colliding;
     private bool started = false;
     private bool ended = false;
+    private bool showContextualHelp = false;
 
     private GameManager.GameDifficulty difficulty;
 
@@ -87,9 +92,15 @@ public class FishNet : MonoBehaviour
         bar.gameObject.SetActive(true);
         spriteRenderer.enabled = true;
         started = true;
+
+        if (showContextualHelp)
+        {
+            // Show the text that explains how to move !
+            StartCoroutine(ContextualHelpTimer());
+        }
     }
 
-    public void SetFishNetProperties(FishNetProperties properties)
+    public void SetFishNetProperties(FishNetProperties properties, bool showContextualHelp = false)
     {
         maxTimeBelowZeroTolerance = properties.maxTimeBelowZeroTolerance;
         minTimeBelowZeroTolerance = properties.minTimeBelowZeroTolerance;
@@ -98,6 +109,8 @@ public class FishNet : MonoBehaviour
         rateOfLossClampingFactor = properties.rateOfLossClampingFactor;
         rateOfGain = properties.rateOfGain;
         rateOfGainClampingFactor = properties.rateOfGainClampingFactor;
+
+        this.showContextualHelp = showContextualHelp;
     }
 
     private void ManageHookLevel()
@@ -163,5 +176,14 @@ public class FishNet : MonoBehaviour
             timeColliding = 0;
             colliding = false;
         }
+    }
+
+    private IEnumerator ContextualHelpTimer()
+    {
+        contextualHelpMoveBottom.NewNotification("Move the Fish Net with the stick !", ButtonReference.LStick, 5);
+
+        yield return new WaitForSeconds(6);
+
+        contextualHelpMoveUp.NewNotification("Fill the bar to the top to catch the fish !", ButtonReference.None, 5);
     }
 }

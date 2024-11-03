@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public enum ButtonReference
 {
     None,
+    LStick,
+    RStick,
     A,
     B,
     X,
@@ -82,6 +84,16 @@ public class NotificationAlert : MonoBehaviour
         {
             case ButtonReference.None:
                 imageButton.gameObject.SetActive(false);
+                break;
+
+            case ButtonReference.LStick:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/LStick");
+                imageButton.gameObject.SetActive(true);
+                break;
+
+            case ButtonReference.RStick:
+                imageButton.sprite = Resources.Load<Sprite>("Buttons/RStick");
+                imageButton.gameObject.SetActive(true);
                 break;
 
             case ButtonReference.A:

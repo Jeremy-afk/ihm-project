@@ -35,3 +35,4 @@ MonoBehaviour:
     varianceMultiplier: 0
     baitMaxDurationMultiplier: 1
     minMagnitude: 0.5
+  <displayContextualHelp>k__BackingField: 1
