@@ -178,16 +178,16 @@ MonoBehaviour:
   musicSource: {fileID: 2806853965581343948}
   soundEffectSource: {fileID: 799513485848771121}
   soundEffectLoopSource: {fileID: 5406169547212176452}
-  menuTheme: {fileID: 0}
+  menuTheme: {fileID: 8300000, guid: 9552b204f4326604292c23242dbd08bc, type: 3}
   mainTheme: {fileID: 8300000, guid: 309736f9106de2c47a2a895d4eb477f2, type: 3}
-  chaseTheme: {fileID: 0}
-  winTheme: {fileID: 0}
+  chaseTheme: {fileID: 8300000, guid: 9e2b268a3805c264389052a06e059d2f, type: 3}
+  winTheme: {fileID: 8300000, guid: ad1c95ead310f0e4499eeb38e8d24733, type: 3}
   menuSelect1: {fileID: 8300000, guid: db430dba5aef64f408a37c134d32c12f, type: 3}
-  menuClick: {fileID: 0}
+  menuClick: {fileID: 8300000, guid: db430dba5aef64f408a37c134d32c12f, type: 3}
   plouf: {fileID: 8300000, guid: b38b505fae904d343b2d3fbd08f19192, type: 3}
   fishBites: {fileID: 8300000, guid: 3b8c5ded74023ff43876ad393b2561b6, type: 3}
   fishDirectionChange: {fileID: 0}
-  winSound: {fileID: 0}
+  winSound: {fileID: 8300000, guid: 79647a66465b9ad43a2656d59f15340f, type: 3}
   gameOverSound: {fileID: 8300000, guid: 2755a519e58e3ab458d4f645c6e40edb, type: 3}
 --- !u!1 &8998701981771060757
 GameObject:

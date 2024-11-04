@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip winTheme;
 
     [Header("Sound Effects")]
-    public AudioClip menuSelect1;
+    public AudioClip sea;
     public AudioClip menuClick;
     public AudioClip plouf;
     public AudioClip fishBites;
@@ -41,7 +41,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         // Load audio data
-        menuSelect1.LoadAudioData();
+        //menuSelect1.LoadAudioData();
 
     }
 

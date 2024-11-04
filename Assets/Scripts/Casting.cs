@@ -57,6 +57,8 @@ public class Casting : MonoBehaviour
     private bool isGamePaused;
     [SerializeField] GameObject pauseMenu;
 
+    //[SerializeField] private GameObject audioManager;
+
     private enum CastingState
     {
         Initial,
@@ -173,6 +175,8 @@ public class Casting : MonoBehaviour
     {
         timerWidget.StopTimer();
         castingState = CastingState.FishCaptured;
+        AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.winSound);
+        AudioManager.Instance.PauseMusic();
         fish.Capture();
         cameraFollow.ToogleDynamicMode(false);
         cameraFollow.ToogleFollow(false);
@@ -208,6 +212,7 @@ public class Casting : MonoBehaviour
     private void BeginFishNetMinigame()
     {
         castingState = CastingState.FishEscaping;
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.chaseTheme);
         fish.Hook();
         fish.tag = "Fish";
         fishNet.transform.position = fish.transform.position;
@@ -296,6 +301,7 @@ public class Casting : MonoBehaviour
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
         notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0);
+        AudioManager.Instance.PauseMusic();
         AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.gameOverSound);
         castingState = CastingState.GameOver;
     }

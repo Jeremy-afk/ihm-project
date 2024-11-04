@@ -1382,6 +1382,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 311b18ca02e50c048a3d1cf2ce29ac95, type: 3}
+--- !u!1 &1152846202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8076367282166696561, guid: 311b18ca02e50c048a3d1cf2ce29ac95, type: 3}
+  m_PrefabInstance: {fileID: 1152846201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1201457707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,6 +1954,10 @@ PrefabInstance:
       propertyPath: timerWidget
       value: 
       objectReference: {fileID: 302189354}
+    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1152846202}
     - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: notification
       value: 

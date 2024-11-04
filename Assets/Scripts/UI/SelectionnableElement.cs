@@ -58,7 +58,7 @@ public class SelectionnableElement : MonoBehaviour, ISelectHandler, IPointerEnte
 
         if (useDefaultSounds)
         {
-            audioManager.PlaySoundEffect(audioManager.menuSelect1);
+            //audioManager.PlaySoundEffect(audioManager.menuSelect1);
         }
         else
         {
@@ -78,7 +78,7 @@ public class SelectionnableElement : MonoBehaviour, ISelectHandler, IPointerEnte
 
         if (useDefaultSounds)
         {
-            audioManager.PlaySoundEffect(audioManager.menuSelect1);
+            //audioManager.PlaySoundEffect(audioManager.menuSelect1);
         }
         else
         {

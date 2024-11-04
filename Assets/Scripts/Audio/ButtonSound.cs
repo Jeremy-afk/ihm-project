@@ -38,7 +38,7 @@ public class ButtonSound : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 
         if (useDefaultSounds)
         {
-            audioManager.PlaySoundEffect(audioManager.menuSelect1);
+            //audioManager.PlaySoundEffect(audioManager.menuSelect1);
         }
         else
         {
@@ -53,7 +53,7 @@ public class ButtonSound : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 
         if (useDefaultSounds)
         {
-            audioManager.PlaySoundEffect(audioManager.menuSelect1);
+            //audioManager.PlaySoundEffect(audioManager.menuSelect1);
         }
         else
         {
