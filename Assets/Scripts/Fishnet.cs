@@ -16,6 +16,10 @@ public struct FishNetProperties
 
 public class FishNet : MonoBehaviour
 {
+    [SerializeField] private bool useColorIndicator = true;
+    [SerializeField] private Color hookingColor = Color.green;
+    [SerializeField] private Color offHookColor = Color.red;
+
     private InputActionsAsset controls;
 
     [Space]
@@ -70,6 +74,8 @@ public class FishNet : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         spriteRenderer.enabled = false;
+        if (useColorIndicator)
+            spriteRenderer.color = hookingColor;
     }
 
     private void Update()
@@ -166,6 +172,8 @@ public class FishNet : MonoBehaviour
         {
             timeColliding = 0;
             colliding = true;
+            if (useColorIndicator)
+                spriteRenderer.color = hookingColor;
         }
     }
 
@@ -175,6 +183,8 @@ public class FishNet : MonoBehaviour
         {
             timeColliding = 0;
             colliding = false;
+            if (useColorIndicator)
+                spriteRenderer.color = offHookColor;
         }
     }
 

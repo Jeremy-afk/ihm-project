@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 450338925}
   backButtonSelection: {fileID: 0}
-  inputAction: {fileID: 0}
+  inputAction: {fileID: -944628639613478452, guid: c96fd12f8b4ef9741977213d588c79b7, type: 3}
   backAction:
     m_Name: Back
     m_Type: 0
@@ -639,6 +639,10 @@ PrefabInstance:
       propertyPath: castingSystem
       value: 
       objectReference: {fileID: 1335643143}
+    - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: offHookColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: contextualHelpMoveUp
       value: 

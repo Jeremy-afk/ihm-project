@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff50dafa23f42b498e78c0b530ae33b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useColorIndicator: 1
+  hookingColor: {r: 0, g: 1, b: 0, a: 0.5019608}
+  offHookColor: {r: 1, g: 0, b: 0, a: 0.8}
   maxTimeBelowZeroTolerance: 1
   minTimeBelowZeroTolerance: 0.5
   netMovingSpeed: 0
@@ -56,6 +59,8 @@ MonoBehaviour:
   rateOfGainClampingFactor: 0
   bar: {fileID: 0}
   castingSystem: {fileID: 0}
+  contextualHelpMoveBottom: {fileID: 0}
+  contextualHelpMoveUp: {fileID: 0}
 --- !u!212 &216002796774586950
 SpriteRenderer:
   m_ObjectHideFlags: 0

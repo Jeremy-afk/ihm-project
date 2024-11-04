@@ -51,4 +51,9 @@ public class GameManager : MonoBehaviour
     {
         selectedDifficulty = (GameDifficulty)difficultyIndex;
     }
+
+    private void LoadVideoPlayerPrefs()
+    {
+        Screen.fullScreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
+    }
 }

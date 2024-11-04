@@ -108,12 +108,14 @@ public class Casting : MonoBehaviour
 
         if (playerInput.currentControlScheme == "Switch Controller" || playerInput.currentControlScheme == "Xbox Controller")
         {
-                notification.NewNotification("Press Button to start!", ButtonReference.A, 0);
+            notification.NewNotification("Press Button to start!", ButtonReference.A, 0);
         } 
         else if (playerInput.currentControlScheme == "Keyboard & Mouse") 
         {
             notification.NewNotification("Press Button to start!", ButtonReference.Space, 0);
         }
+
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.mainTheme);
     }
 
     private void Update()

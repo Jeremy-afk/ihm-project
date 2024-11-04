@@ -36,7 +36,7 @@ public class MenuContext : MonoBehaviour
         
         if (inputActionLoaded)
         {
-            print(backAction);
+            //print(backAction);
             backAction.Enable();
             backAction.performed += OnBackButtonPressed;
         }
@@ -46,7 +46,7 @@ public class MenuContext : MonoBehaviour
     {
         if (inputActionLoaded)
         {
-            print(backAction);
+            //print(backAction);
             backAction.performed -= OnBackButtonPressed;
             backAction.Disable();
         }

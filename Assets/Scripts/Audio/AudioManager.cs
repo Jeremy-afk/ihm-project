@@ -40,9 +40,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        // Load audio data
-        //menuSelect1.LoadAudioData();
-
+        LoadAudioPlayerPrefs();
     }
 
     // Classic function controls
@@ -80,5 +78,28 @@ public class AudioManager : MonoBehaviour
     public void StopSoundEffectLoop()
     {
         soundEffectLoopSource.Stop();
+    }
+
+    public void SetMusicVolume(float vol)
+    {
+        musicSource.volume = vol;
+    }
+
+    public void SetSFXVolume(float vol)
+    {
+        soundEffectSource.volume = vol;
+        soundEffectLoopSource.volume = vol;
+    }
+
+    private void LoadAudioPlayerPrefs()
+    {
+        float masterVol = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        float musicVol = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float sfxVol = PlayerPrefs.GetFloat("SFXVolume", 1f);
+
+        AudioListener.volume = masterVol;
+        musicSource.volume = musicVol;
+        soundEffectSource.volume = sfxVol;
+        soundEffectLoopSource.volume = sfxVol;
     }
 }

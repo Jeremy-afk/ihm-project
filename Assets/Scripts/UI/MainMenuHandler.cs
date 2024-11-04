@@ -27,6 +27,8 @@ public class MainMenuHandler : MonoBehaviour
         {
             dropdown.onValueChanged.AddListener(OnDifficultyChange); // Not useful for the moment
         }
+
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.menuTheme);
     }
 
     public void NewGame()
