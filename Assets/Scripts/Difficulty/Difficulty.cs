@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "NewDifficulty")]
+[CreateAssetMenu(menuName = "New Difficulty")]
 public class Difficulty : ScriptableObject
 {
     [field: SerializeField]

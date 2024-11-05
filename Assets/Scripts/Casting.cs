@@ -38,7 +38,9 @@ public class Casting : MonoBehaviour
     [SerializeField] private FishPool fishPool;
     [SerializeField] private FishNet fishNet;
     [SerializeField] private Timer timerWidget;
+    [SerializeField] private CheeringBoy cheeringBoy;
 
+    private bool useCheeringBoy;
     private float timer;
     private float angle;
     private float strenght = .5f;
@@ -55,6 +57,7 @@ public class Casting : MonoBehaviour
     private PlayerInput playerInput;
 
     private bool isGamePaused;
+
     [SerializeField] GameObject pauseMenu;
 
     //[SerializeField] private GameObject audioManager;
@@ -221,6 +224,9 @@ public class Casting : MonoBehaviour
         fishNet.ActivateFishNet();
         notification.NewNotification("HIT !", ButtonReference.None, .8f, 0.2f);
 
+        if (PlayerPrefs.GetInt("CheeringBoy") == 1)
+            cheeringBoy.StartCheering();
+
         instantiatedTarget.gameObject.SetActive(false);
 
         cameraFollow.SetPrimaryTarget(fishNet.transform);
@@ -294,6 +300,7 @@ public class Casting : MonoBehaviour
 
     private IEnumerator WaitGameOver(string msg)
     {
+        cheeringBoy.StopCheering();
         timerWidget.StopTimer();
 
         if (castingState == CastingState.GameOver || castingState == CastingState.WaitGameOver)
@@ -310,6 +317,8 @@ public class Casting : MonoBehaviour
 
     private IEnumerator AnimateWin()
     {
+        cheeringBoy.StopCheering();
+
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
         notification.NewNotification("You won !\nYou caught the fish !", ButtonReference.None, 0, 0);
@@ -342,6 +351,8 @@ public class Casting : MonoBehaviour
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
             isGamePaused = !isGamePaused;
+            if (PlayerPrefs.GetInt("CheeringBoy") == 0) cheeringBoy.StopCheering();
+            else if (castingState == CastingState.FishEscaping) cheeringBoy.StartCheering();
         }
     }
 

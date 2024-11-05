@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [Serializable]
 public struct FishNetProperties
@@ -16,7 +17,6 @@ public struct FishNetProperties
 
 public class FishNet : MonoBehaviour
 {
-    [SerializeField] private bool useColorIndicator = true;
     [SerializeField] private Color hookingColor = Color.green;
     [SerializeField] private Color offHookColor = Color.red;
 
@@ -54,6 +54,8 @@ public class FishNet : MonoBehaviour
 
     private GameManager.GameDifficulty difficulty;
 
+    private bool fixedColorSquare;
+
     private void Awake()
     {
         controls = new InputActionsAsset();
@@ -68,14 +70,15 @@ public class FishNet : MonoBehaviour
 
     private void Start()
     {
+        fixedColorSquare = PlayerPrefs.GetInt("FixedColorSquare") == 1;
+
         hookTimeAllowedBelowZero = maxTimeBelowZeroTolerance;
         bar.SetValue(0.5f);
         boxFishNetCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         spriteRenderer.enabled = false;
-        if (useColorIndicator)
-            spriteRenderer.color = hookingColor;
+        ChangeSquareColor(true);
     }
 
     private void Update()
@@ -89,6 +92,16 @@ public class FishNet : MonoBehaviour
         UpdateHookBarVisual();
 
         timeColliding += Time.deltaTime;
+    }
+
+    public void FixColorSquare(bool fix)
+    {
+        PlayerPrefs.SetInt("FixedColorSquare", fix ? 1 : 0);
+
+        if (fix)
+        {
+            spriteRenderer.color = Color.green;
+        }
     }
 
     public void ActivateFishNet()
@@ -172,8 +185,7 @@ public class FishNet : MonoBehaviour
         {
             timeColliding = 0;
             colliding = true;
-            if (useColorIndicator)
-                spriteRenderer.color = hookingColor;
+            ChangeSquareColor(true);
         }
     }
 
@@ -183,9 +195,15 @@ public class FishNet : MonoBehaviour
         {
             timeColliding = 0;
             colliding = false;
-            if (useColorIndicator)
-                spriteRenderer.color = offHookColor;
+            ChangeSquareColor(false);
         }
+    }
+
+    private void ChangeSquareColor(bool on)
+    {
+        if (fixedColorSquare) return;
+
+        spriteRenderer.color = on ? hookingColor : offHookColor;
     }
 
     private IEnumerator ContextualHelpTimer()
