@@ -190,10 +190,10 @@ public class FishNet : MonoBehaviour
 
     private IEnumerator ContextualHelpTimer()
     {
-        contextualHelpMoveBottom.NewNotification("Move the Fish Net with the stick !", ButtonReference.LStick, 5);
+        contextualHelpMoveBottom.NewNotification("Move the Fish Net with the stick !", ButtonReference.LStick, 5, 1);
 
         yield return new WaitForSeconds(6);
 
-        contextualHelpMoveUp.NewNotification("Fill the bar to the top to catch the fish !", ButtonReference.None, 5);
+        contextualHelpMoveUp.NewNotification("Fill the bar to the top to catch the fish !", ButtonReference.None, 5, 1);
     }
 }

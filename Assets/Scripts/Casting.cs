@@ -108,11 +108,11 @@ public class Casting : MonoBehaviour
 
         if (playerInput.currentControlScheme == "Switch Controller" || playerInput.currentControlScheme == "Xbox Controller")
         {
-            notification.NewNotification("Press Button to start!", ButtonReference.A, 0);
+            notification.NewNotification("Press Button to start!", ButtonReference.A, 0, 0);
         } 
         else if (playerInput.currentControlScheme == "Keyboard & Mouse") 
         {
-            notification.NewNotification("Press Button to start!", ButtonReference.Space, 0);
+            notification.NewNotification("Press Button to start!", ButtonReference.Space, 0, 0);
         }
 
         AudioManager.Instance.PlayMusic(AudioManager.Instance.mainTheme);
@@ -203,11 +203,11 @@ public class Casting : MonoBehaviour
     {
         if (playerInput.currentControlScheme == "Switch Controller" || playerInput.currentControlScheme == "Xbox Controller")
         {
-            notification.NewNotification("Press Button !", ButtonReference.A, 0);
+            notification.NewNotification("Press Button !", ButtonReference.A, 0, 0);
         }
         else if (playerInput.currentControlScheme == "Keyboard & Mouse")
         {
-            notification.NewNotification("Press Button !", ButtonReference.Space, 0);
+            notification.NewNotification("Press Button !", ButtonReference.Space, 0, 0);
         }
     }
 
@@ -219,7 +219,7 @@ public class Casting : MonoBehaviour
         fish.tag = "Fish";
         fishNet.transform.position = fish.transform.position;
         fishNet.ActivateFishNet();
-        notification.NewNotification("HIT !", ButtonReference.None, .8f);
+        notification.NewNotification("HIT !", ButtonReference.None, .8f, 0.2f);
 
         instantiatedTarget.gameObject.SetActive(false);
 
@@ -302,7 +302,7 @@ public class Casting : MonoBehaviour
         castingState = CastingState.WaitGameOver;
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
-        notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0);
+        notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0, 0);
         AudioManager.Instance.PauseMusic();
         AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.gameOverSound);
         castingState = CastingState.GameOver;
@@ -312,7 +312,7 @@ public class Casting : MonoBehaviour
     {
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
-        notification.NewNotification("You won !\nYou caught the fish !", ButtonReference.None, 0);
+        notification.NewNotification("You won !\nYou caught the fish !", ButtonReference.None, 0, 0);
 
         castingState = CastingState.GameOver;
     }

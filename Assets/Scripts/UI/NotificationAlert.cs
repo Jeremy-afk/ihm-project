@@ -33,7 +33,7 @@ public class NotificationAlert : MonoBehaviour
     [SerializeField, Tooltip("Disappear after this much time. 0 means this will not disappear automatically.")]
     private float defaultDuration = 3f;
     [SerializeField, Tooltip("Fading duration ? (0 = no fading ~ instant)")]
-    private float fadeDuration = 0.4f;
+    private float defaultFadeDuration = 0.4f;
 
     [Space]
 
@@ -57,19 +57,19 @@ public class NotificationAlert : MonoBehaviour
     private void Awake()
     {
         if (showOnStart)
-            NewNotification("Welcome to the game!", ButtonReference.None, defaultDuration);
+            ToogleNotification(true);
         else
             ToogleNotification(false);
     }
 
-    public void NewNotification(string text, ButtonReference buttonToDisplay, float duration)
+    public void NewNotification(string text, ButtonReference buttonToDisplay, float duration, float fadeDuration)
     {
         textNotification.text = text;
         HandleButtonImage(buttonToDisplay);
         ToogleNotification(true);
 
         if (duration > 0f)
-            StartCoroutine(FadeAfter(duration));
+            StartCoroutine(FadeAfter(duration, fadeDuration));
     }
 
     public void ToogleNotification(bool show)
@@ -146,7 +146,7 @@ public class NotificationAlert : MonoBehaviour
         // It should depend if the button is A, B, X or Y and also if the player is using a controller or a keyboard
     }
 
-    private IEnumerator FadeAfter(float duration)
+    private IEnumerator FadeAfter(float duration, float fadeDuration)
     {
         float time = duration;
 
@@ -156,7 +156,7 @@ public class NotificationAlert : MonoBehaviour
 
             if (time < fadeDuration)
             {
-                notificationCanvasGroup.alpha = time / fadeDuration;
+                notificationCanvasGroup.alpha = time / defaultFadeDuration;
             }
 
             yield return null;
