@@ -51,6 +51,8 @@ public class CheeringBoy : MonoBehaviour
     {
         if (cheering) yield break;
 
+        cheering = true;
+
         while (true)
         {
             yield return new WaitForSeconds(cheerBoyQuietness + Random.Range(-cheerBoyQuietnessVariance, cheerBoyQuietnessVariance));
