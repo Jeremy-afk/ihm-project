@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fcd8323ab2d8434ca655a64e5a79a25, type: 3}
+  m_Name: DefaultCheerPack
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: CheeringPack
+  LowCheerSentences:
+  - Sentence: Don't let go !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: Hold on !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: Don't give up !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: You can do it !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: IT'S NOT OVER YET
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: I believe in you !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: Focus !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: Frame it !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: You can do it !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: AAAAAAAAAH
+    Sprite: {fileID: 0}
+    Probability: 2
+    ShakeFactor: 1.5
+  lowMidThreshold: 0.2
+  MidCheerSentences:
+  - Sentence: Yeah keep it going !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 0
+  - Sentence: Don't let your guard down !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 0.5
+  - Sentence: Stay focused !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 0
+  - Sentence: Believe in yourself !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 0
+  - Sentence: I know you can do it !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 0
+  - Sentence: Catch dat fish !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 0
+  - Sentence: Capture that damn fish already !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 1
+  - Sentence: Keep it going !
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 0
+  midHighThreshold: 0.85
+  HighCheerSentences:
+  - Sentence: ALMOST THERE
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: YEAAH
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: LET'S GOOOO
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: YOU CAN DO IT
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: JUST A LITTLE LONGER
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: YEAAAAAAH
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: AAAAAAAAAAAAAA
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: AAAAAAAAAAAAAA
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 2
+  - Sentence: Just. Get. The Fish.
+    Sprite: {fileID: 0}
+    Probability: 0
+    ShakeFactor: 0.2

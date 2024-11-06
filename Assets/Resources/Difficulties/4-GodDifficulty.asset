@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3a247585ea1ec41b2582cdb6d3d387, type: 3}
+  m_Name: 4-GodDifficulty
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: God
+  <FishPoolProperties>k__BackingField:
+    maxFishes: 3
+    minimumSpawnDistance: 5
+  <FishNetProperties>k__BackingField:
+    maxTimeBelowZeroTolerance: 0.4
+    minTimeBelowZeroTolerance: 0.1
+    netMovingSpeed: 8
+    rateLoss: 0.24
+    rateOfLossClampingFactor: 0
+    rateOfGain: 0.11
+    rateOfGainClampingFactor: 0
+  <CastingProperties>k__BackingField:
+    baitMaxDistance: 1
+    rotationSpeed: 3
+    forceSpeed: 3
+  <FishModifiers>k__BackingField:
+    useModifiers: 1
+    speedMultiplier: 2
+    speedChangeMultiplier: 3
+    varianceMultiplier: 3
+    baitMaxDurationMultiplier: 0.15
+    minMagnitude: 0.8
