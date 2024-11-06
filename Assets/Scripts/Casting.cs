@@ -38,7 +38,9 @@ public class Casting : MonoBehaviour
     [SerializeField] private FishPool fishPool;
     [SerializeField] private FishNet fishNet;
     [SerializeField] private Timer timerWidget;
+    [SerializeField] private CheeringBoy cheeringBoy;
 
+    private bool useCheeringBoy;
     private float timer;
     private float angle;
     private float strenght = .5f;
@@ -55,6 +57,7 @@ public class Casting : MonoBehaviour
     private PlayerInput playerInput;
 
     private bool isGamePaused;
+
     [SerializeField] GameObject pauseMenu;
 
     //[SerializeField] private GameObject audioManager;
@@ -108,11 +111,11 @@ public class Casting : MonoBehaviour
 
         if (playerInput.currentControlScheme == "Switch Controller" || playerInput.currentControlScheme == "Xbox Controller")
         {
-            notification.NewNotification("Press Button to start!", ButtonReference.A, 0);
+            notification.NewNotification("Press Button to start!", ButtonReference.A, 0, 0);
         } 
         else if (playerInput.currentControlScheme == "Keyboard & Mouse") 
         {
-            notification.NewNotification("Press Button to start!", ButtonReference.Space, 0);
+            notification.NewNotification("Press Button to start!", ButtonReference.Space, 0, 0);
         }
 
         AudioManager.Instance.PlayMusic(AudioManager.Instance.mainTheme);
@@ -203,11 +206,11 @@ public class Casting : MonoBehaviour
     {
         if (playerInput.currentControlScheme == "Switch Controller" || playerInput.currentControlScheme == "Xbox Controller")
         {
-            notification.NewNotification("Press Button !", ButtonReference.A, 0);
+            notification.NewNotification("Press Button !", ButtonReference.A, 0, 0);
         }
         else if (playerInput.currentControlScheme == "Keyboard & Mouse")
         {
-            notification.NewNotification("Press Button !", ButtonReference.Space, 0);
+            notification.NewNotification("Press Button !", ButtonReference.Space, 0, 0);
         }
     }
 
@@ -219,7 +222,12 @@ public class Casting : MonoBehaviour
         fish.tag = "Fish";
         fishNet.transform.position = fish.transform.position;
         fishNet.ActivateFishNet();
-        notification.NewNotification("HIT !", ButtonReference.None, .8f);
+        notification.NewNotification("HIT !", ButtonReference.None, .8f, 0.2f);
+
+        if (PlayerPrefs.GetInt("CheeringBoy") == 1)
+        {
+            cheeringBoy.StartCheering();
+        }
 
         instantiatedTarget.gameObject.SetActive(false);
 
@@ -294,6 +302,7 @@ public class Casting : MonoBehaviour
 
     private IEnumerator WaitGameOver(string msg)
     {
+        cheeringBoy.StopCheering();
         timerWidget.StopTimer();
 
         if (castingState == CastingState.GameOver || castingState == CastingState.WaitGameOver)
@@ -302,7 +311,7 @@ public class Casting : MonoBehaviour
         castingState = CastingState.WaitGameOver;
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
-        notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0);
+        notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0, 0);
         AudioManager.Instance.PauseMusic();
         AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.gameOverSound);
         castingState = CastingState.GameOver;
@@ -310,9 +319,11 @@ public class Casting : MonoBehaviour
 
     private IEnumerator AnimateWin()
     {
+        cheeringBoy.StopCheering();
+
         yield return new WaitForSeconds(timeDelayBeforeGameOver);
 
-        notification.NewNotification("You won !\nYou caught the fish !", ButtonReference.None, 0);
+        notification.NewNotification("You won !\nYou caught the fish !", ButtonReference.None, 0, 0);
 
         castingState = CastingState.GameOver;
     }
@@ -342,6 +353,8 @@ public class Casting : MonoBehaviour
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
             isGamePaused = !isGamePaused;
+            if (PlayerPrefs.GetInt("CheeringBoy") == 0) cheeringBoy.StopCheering();
+            else if (castingState == CastingState.FishEscaping) cheeringBoy.StartCheering();
         }
     }
 

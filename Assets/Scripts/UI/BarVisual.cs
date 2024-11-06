@@ -10,6 +10,8 @@ public class BarVisual : MonoBehaviour
     [SerializeField]
     private Image barFill;
     [SerializeField]
+    private Color defaultColor = Color.yellow;
+    [SerializeField]
     private Color lowColor = Color.red;
     [SerializeField]
     private Color highColor = Color.green;
@@ -30,6 +32,7 @@ public class BarVisual : MonoBehaviour
     private InputAction debugActionAdd;
     private float m_currentValue;
 
+    private bool useColor;
     private float maxHue;
     private float minHue;
 
@@ -48,6 +51,8 @@ public class BarVisual : MonoBehaviour
 
     private void Start()
     {
+        FixColor(PlayerPrefs.GetInt("FixedColorBar") == 1);
+
         Color.RGBToHSV(lowColor, out minHue, out _, out _);
         Color.RGBToHSV(highColor, out maxHue, out _, out _);
         SetValue(startValue);
@@ -61,12 +66,27 @@ public class BarVisual : MonoBehaviour
         }
     }
 
+    public void FixColor(bool fix)
+    {
+        PlayerPrefs.SetInt("FixedColorBar", fix ? 1 : 0);
+
+        useColor = !fix;
+
+        if (fix)
+        {
+            print("fix color");
+            barFill.color = defaultColor;
+        }
+    }
+
     // Should be between 0 and 1
     public void SetValue(float val)
     {
         val = Mathf.Clamp01(val);
         m_currentValue = val;
         barFill.fillAmount = val;
+
+        if (!useColor) return;
 
         if (fixSaturation)
         {
