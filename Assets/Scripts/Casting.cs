@@ -225,7 +225,9 @@ public class Casting : MonoBehaviour
         notification.NewNotification("HIT !", ButtonReference.None, .8f, 0.2f);
 
         if (PlayerPrefs.GetInt("CheeringBoy") == 1)
+        {
             cheeringBoy.StartCheering();
+        }
 
         instantiatedTarget.gameObject.SetActive(false);
 

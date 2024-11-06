@@ -11,11 +11,16 @@ public class PauseMenuManager : MonoBehaviour
     [Space]
 
     [SerializeField]
-    private Toggle toogleFixedBarColor;
+    private Toggle toogleFixedColorBar;
     [SerializeField]
     private Toggle toogleFixedSquareColor;
     [SerializeField]
     private Toggle toogleCheeringBoy;
+
+    private void OnEnable()
+    {
+        LoadPreferences();
+    }
 
     public void ShowMainPauseMenu()
     {
@@ -32,7 +37,7 @@ public class PauseMenuManager : MonoBehaviour
     public void LoadPreferences()
     {
         toogleCheeringBoy.isOn = PlayerPrefs.GetInt("CheeringBoy") == 1;
-        toogleFixedSquareColor.isOn = PlayerPrefs.GetInt("FixColorSquare") == 1;
-        toogleFixedBarColor.isOn = PlayerPrefs.GetInt("FixBarColor") == 1;
+        toogleFixedSquareColor.isOn = PlayerPrefs.GetInt("FixedColorSquare") == 1;
+        toogleFixedColorBar.isOn = PlayerPrefs.GetInt("FixedColorBar") == 1;
     }
 }

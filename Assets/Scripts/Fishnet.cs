@@ -97,10 +97,11 @@ public class FishNet : MonoBehaviour
     public void FixColorSquare(bool fix)
     {
         PlayerPrefs.SetInt("FixedColorSquare", fix ? 1 : 0);
+        fixedColorSquare = fix;
 
         if (fix)
         {
-            spriteRenderer.color = Color.green;
+            spriteRenderer.color = hookingColor;
         }
     }
 

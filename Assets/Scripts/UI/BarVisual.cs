@@ -51,7 +51,7 @@ public class BarVisual : MonoBehaviour
 
     private void Start()
     {
-        useColor = PlayerPrefs.GetInt("FixedBarColor") == 1;
+        FixColor(PlayerPrefs.GetInt("FixedColorBar") == 1);
 
         Color.RGBToHSV(lowColor, out minHue, out _, out _);
         Color.RGBToHSV(highColor, out maxHue, out _, out _);
@@ -68,10 +68,13 @@ public class BarVisual : MonoBehaviour
 
     public void FixColor(bool fix)
     {
-        PlayerPrefs.SetInt("FixedBarColor", fix ? 1 : 0);
+        PlayerPrefs.SetInt("FixedColorBar", fix ? 1 : 0);
+
+        useColor = !fix;
 
         if (fix)
         {
+            print("fix color");
             barFill.color = defaultColor;
         }
     }
