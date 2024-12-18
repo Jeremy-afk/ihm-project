@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
+using System.IO.Ports;
 
 [Serializable]
 public struct FishNetProperties
@@ -56,6 +57,11 @@ public class FishNet : MonoBehaviour
 
     private bool fixedColorSquare;
 
+    //Arduino stuff
+    [SerializeField] private string portName = "COM3"; // Nom du port série
+    [SerializeField] private int baudRate = 9600; // Baud rate
+    private SerialPort serialPort;
+
     private void Awake()
     {
         controls = new InputActionsAsset();
@@ -83,6 +89,9 @@ public class FishNet : MonoBehaviour
 
     private void Update()
     {
+        serialPort = new SerialPort(portName, baudRate);
+        serialPort.Open();
+
         if (!started || ended) return;
 
         direction = controls.Fishing.Movecursor.ReadValue<Vector2>();
@@ -150,6 +159,14 @@ public class FishNet : MonoBehaviour
                 hookTimeAllowedBelowZero -= Time.deltaTime;
             }
         }
+
+        // Envoi de la valeur de `hookLevel` au port série pour Arduino
+        if (serialPort != null && serialPort.IsOpen)
+        {
+            string data = hookLevel.ToString("F2"); // Formate `hookLevel` avec deux décimales
+            serialPort.WriteLine(data); // Envoie de la donnée
+        }
+
 
         if (hookLevel >= 1)
         {
