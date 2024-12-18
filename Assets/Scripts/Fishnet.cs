@@ -58,7 +58,7 @@ public class FishNet : MonoBehaviour
     private bool fixedColorSquare;
 
     //Arduino stuff
-    [SerializeField] private string portName = "COM3"; // Nom du port série
+    [SerializeField] private string portName = "COM4"; // Nom du port série
     [SerializeField] private int baudRate = 9600; // Baud rate
     private SerialPort serialPort;
 
