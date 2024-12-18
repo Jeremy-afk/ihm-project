@@ -76,6 +76,9 @@ public class FishNet : MonoBehaviour
 
     private void Start()
     {
+        serialPort = new SerialPort(portName, baudRate);
+        serialPort.Open();
+
         fixedColorSquare = PlayerPrefs.GetInt("FixedColorSquare") == 1;
 
         hookTimeAllowedBelowZero = maxTimeBelowZeroTolerance;
@@ -89,9 +92,6 @@ public class FishNet : MonoBehaviour
 
     private void Update()
     {
-        serialPort = new SerialPort(portName, baudRate);
-        serialPort.Open();
-
         if (!started || ended) return;
 
         direction = controls.Fishing.Movecursor.ReadValue<Vector2>();
@@ -184,12 +184,22 @@ public class FishNet : MonoBehaviour
     {
         ended = true;
         castingSystem.HookSuccessful();
+
+        if (serialPort != null && serialPort.IsOpen)
+        {
+            serialPort.Close();
+        }
     }
 
     private void Escapes()
     {
         castingSystem.FishEscaped();
         ended = true;
+
+        if (serialPort != null && serialPort.IsOpen)
+        {
+            serialPort.Close();
+        }
     }
 
     private void UpdateHookBarVisual()
