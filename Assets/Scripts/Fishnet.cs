@@ -187,6 +187,7 @@ public class FishNet : MonoBehaviour
 
         if (serialPort != null && serialPort.IsOpen)
         {
+            serialPort.WriteLine((0.5).ToString("F2"));
             serialPort.Close();
         }
     }
@@ -198,6 +199,7 @@ public class FishNet : MonoBehaviour
 
         if (serialPort != null && serialPort.IsOpen)
         {
+            serialPort.WriteLine((0.5).ToString("F2"));
             serialPort.Close();
         }
     }
