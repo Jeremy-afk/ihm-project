@@ -829,7 +829,11 @@ PrefabInstance:
       objectReference: {fileID: 967399699}
     - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: portName
-      value: COM4
+      value: COM5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: dataSendRate
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: castingSystem
@@ -844,12 +848,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 590702628}
     - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: maxInstructionsPerFrame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: contextualHelpMoveBottom
       value: 
       objectReference: {fileID: 1684335566}
+    - target: {fileID: 1933806504005327574, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
+      propertyPath: overrideInputWithArduino
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8375094922447440788, guid: 5e0656510416a4c45ba9b100bc351a6d, type: 3}
       propertyPath: m_Name
-      value: Fishnet
+      value: FishNet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

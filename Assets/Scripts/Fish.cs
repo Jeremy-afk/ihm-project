@@ -155,8 +155,6 @@ public class Fish : MonoBehaviour
             float randomAngle = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
             direction = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0) * UnityEngine.Random.Range(minMagnitude * fleeSpeed, fleeSpeed);
 
-            print($"New speed: {direction.magnitude}");
-
             // Rest of this code is only useful if the original random system is used
 
             //float magnitude = direction.magnitude;

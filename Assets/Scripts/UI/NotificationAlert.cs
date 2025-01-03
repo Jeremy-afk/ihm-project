@@ -161,8 +161,6 @@ public class NotificationAlert : MonoBehaviour
         float finalX = baseX + xOffset;
         float finalY = baseY + yOffset;
 
-        print(finalX + " x " + finalY + " y");
-
         // Step 5: Set the position and apply rotation
         rectTransform.anchoredPosition = new Vector2(finalX, finalY);
         rectTransform.localRotation = Quaternion.Euler(0, 0, Random.Range(-randomAngle, randomAngle));
