@@ -3338,6 +3338,18 @@ PrefabInstance:
       propertyPath: notification
       value: 
       objectReference: {fileID: 2020948140}
+    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: maxInstructionsPerFrame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: timeDelayBeforeGameOver
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7238035912417485695, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
+      propertyPath: overrideInputWithArduino
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7935056731089104085, guid: ee248e807bfa5fc4c83f42f02499d15b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

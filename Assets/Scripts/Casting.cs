@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Globalization;
+using System.IO.Ports;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -60,7 +62,18 @@ public class Casting : MonoBehaviour
 
     [SerializeField] GameObject pauseMenu;
 
-    //[SerializeField] private GameObject audioManager;
+    //Arduino stuff
+    [Header("Arduino stuff")]
+    [SerializeField] private string portName = "COM5"; // Nom du port série
+    [SerializeField] private int baudRate = 9600; // Baud rate
+    [SerializeField] private int dataSendRate = 15; // Arduino send rate
+    [SerializeField] private int maxInstructionsPerFrame = 1;
+    [SerializeField] private bool overrideInputWithArduino;
+    private bool isArduinoButtonPressed;
+    private SerialPort serialPort;
+
+    private float ardunioCooldown;
+
 
     private enum CastingState
     {
@@ -82,6 +95,11 @@ public class Casting : MonoBehaviour
 
     private void OnEnable()
     {
+        serialPort = new SerialPort(portName, baudRate);
+        serialPort.ReadTimeout = 300;
+        serialPort.WriteTimeout = 300;
+        serialPort.Open();
+
         controls.Enable();
         controls.Fishing.SelectCasting.performed += OnCasting;
         controls.Fishing.Pause.performed += OnPause;
@@ -89,6 +107,7 @@ public class Casting : MonoBehaviour
 
     private void OnDisable()
     {
+        serialPort.Close();
         controls.Fishing.SelectCasting.performed -= OnCasting;
         controls.Fishing.SelectCasting.performed -= OnPause;
         controls.Disable();
@@ -141,6 +160,20 @@ public class Casting : MonoBehaviour
             timer += Time.deltaTime;
             UpdateTarget();
         }
+
+        if (overrideInputWithArduino)
+        {
+            GetArduinoInput();
+        }
+        else fishNet.inputDirection = controls.Fishing.Movecursor.ReadValue<Vector2>();
+
+        if (ardunioCooldown <= 0 && castingState == CastingState.FishEscaping)
+        {
+            SendDataToArduino(fishNet.hookLevel);
+            ardunioCooldown = 1f / dataSendRate; // Cooldown
+        }
+
+        ardunioCooldown -= Time.deltaTime;
     }
 
     #region Public Methods
@@ -186,6 +219,68 @@ public class Casting : MonoBehaviour
         cameraFollow.ToogleDynamicMode(false);
         cameraFollow.ToogleFollow(false);
         StartCoroutine(AnimateWin());
+    }
+
+    #endregion
+
+    #region Arduino
+
+    private void GetArduinoInput()
+    {
+        int instructions = 0;
+
+        while (serialPort != null && serialPort.IsOpen && serialPort.BytesToRead > 0 && instructions < maxInstructionsPerFrame)
+        {
+            string inputData = serialPort.ReadLine();
+            if (inputData.Length < 4)
+            {
+                Debug.LogWarning("Received data too short: " + inputData);
+                continue;
+            }
+
+            string inputType = inputData[..4];
+            inputData = inputData[4..];
+
+            switch (inputType)
+            {
+                case "JOY:":
+                    string[] values = inputData.Split(',');
+
+                    if (values.Length == 2)
+                    {
+                        float x = float.Parse(values[0], CultureInfo.InvariantCulture);
+                        float y = -float.Parse(values[1], CultureInfo.InvariantCulture);
+
+                        fishNet.inputDirection = new Vector2(x, y);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Received unexpected JOY format: " + inputData);
+                    }
+                    break;
+
+                case "BTN:":
+                    isArduinoButtonPressed = inputData == "1";
+                    if (isArduinoButtonPressed) OnCasting(default);
+                    print("button state changed: " + isArduinoButtonPressed);
+                    break;
+
+                default:
+                    Debug.LogWarning($"Received unexpected input type: {inputType}({inputData})");
+                    break;
+            }
+
+            instructions++;
+        }
+    }
+
+    private void SendDataToArduino(float data)
+    {
+        if (serialPort != null && serialPort.IsOpen)
+        {
+            string dataString = "LED:" + data.ToString("0.00", CultureInfo.InvariantCulture); // Formate `hookLevel` avec deux décimales
+            serialPort.WriteLine(dataString); // Envoie de la donnée
+        }
     }
 
     #endregion
@@ -309,7 +404,19 @@ public class Casting : MonoBehaviour
             yield break;
 
         castingState = CastingState.WaitGameOver;
-        yield return new WaitForSeconds(timeDelayBeforeGameOver);
+
+        SendDataToArduino(0.5f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver/6);
+        SendDataToArduino(0f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver/6);
+        SendDataToArduino(0.5f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver/6);
+        SendDataToArduino(0f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver/6);
+        SendDataToArduino(0.5f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver/6);
+        SendDataToArduino(0f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver/6);
 
         notification.NewNotification("Game Over !\n" + msg, ButtonReference.None, 0, 0);
         AudioManager.Instance.PauseMusic();
@@ -321,7 +428,17 @@ public class Casting : MonoBehaviour
     {
         cheeringBoy.StopCheering();
 
-        yield return new WaitForSeconds(timeDelayBeforeGameOver);
+        SendDataToArduino(0.5f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver / 5);
+        SendDataToArduino(1f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver / 5);
+        SendDataToArduino(0.5f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver / 5);
+        SendDataToArduino(1f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver / 5);
+        SendDataToArduino(0.5f);
+        yield return new WaitForSeconds(timeDelayBeforeGameOver / 5);
+        SendDataToArduino(1f);
 
         notification.NewNotification("You won !\nYou caught the fish !", ButtonReference.None, 0, 0);
 
